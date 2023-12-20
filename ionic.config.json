@@ -1,0 +1,7 @@
+{
+  "name": "LJKD-merchant-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

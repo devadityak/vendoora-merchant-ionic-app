@@ -1,0 +1,83 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Login </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Lala Ji ki Dukan</ion-card-title>
+        <ion-card-subtitle>Welcome Lala Ji</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="ion-padding" slot="content">
+          <form [formGroup]="myForm" (ngSubmit)="login()">
+            <!-- <ion-item> -->
+            <ion-input
+              formControlName="username"
+              labelPlacement="floating"
+              type="email"
+            >
+              <div slot="label">
+                Email
+                <ion-text color="danger"> *</ion-text>
+              </div>
+            </ion-input>
+            <!-- </ion-item> -->
+            <br />
+            <!-- <ion-item> -->
+            <ion-input
+              labelPlacement="floating"
+              type="password"
+              formControlName="password"
+            >
+              <div slot="label">
+                Password
+                <ion-text color="danger" required="true"> *</ion-text>
+              </div>
+            </ion-input>
+            <!-- </ion-item> -->
+
+            <br />
+
+            <ion-button type="submit" fill="outline" expand="block"
+              >Login</ion-button
+            >
+
+            <br />
+
+            <ion-button
+              type="button"
+              fill="outline"
+              color="danger"
+              expand="block"
+              href="tabs"
+              >Forgot Password</ion-button
+            >
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<!-- <ion-loading trigger="open-loading" message="Loading..."></ion-loading> -->
+
+<ion-alert
+  [isOpen]="isAlertOpen"
+  header="Alert"
+  [message]="alertMsg"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false, '')"
+></ion-alert>
+
+<!-- <ion-button href="tabs/tab1">Default</ion-button> -->

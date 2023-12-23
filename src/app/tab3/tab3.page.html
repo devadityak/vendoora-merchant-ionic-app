@@ -1,17 +1,92 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title> Setting </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">Setting</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <br />
+  <br />
+
+  <ion-accordion-group (ionChange)="accordionGroupChange($event)">
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Change Password</ion-label>
+      </ion-item>
+
+      <div class="ion-padding" slot="content">
+        <form [formGroup]="myForm">
+          <ion-item>
+            <ion-input
+              formControlName="username"
+              labelPlacement="floating"
+              value=""
+            >
+              <div slot="label">
+                Old Password
+                <ion-text color="danger"> *</ion-text>
+              </div>
+            </ion-input>
+          </ion-item>
+          <br />
+          <ion-item>
+            <ion-input labelPlacement="floating" value="">
+              <div slot="label">
+                New Password
+                <ion-text color="danger" required="true"> *</ion-text>
+              </div>
+            </ion-input>
+          </ion-item>
+          <br />
+          <ion-item>
+            <ion-input labelPlacement="floating" value="">
+              <div slot="label">
+                Retype New Password
+                <ion-text color="danger"> *</ion-text>
+              </div>
+            </ion-input>
+          </ion-item>
+
+          <br />
+
+          <ion-button fill="outline" expand="block">Change Password</ion-button>
+        </form>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="second">
+      <ion-item slot="header" color="light">
+        <ion-label>Other</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <br />
+        <ion-button
+          color="danger"
+          fill="outline"
+          expand="block"
+          (click)="logout()"
+          >Logout</ion-button
+        >
+      </div>
+    </ion-accordion>
+    <!-- <ion-accordion value="third">
+      <ion-item slot="header" color="light">
+        <ion-label>Third Accordion</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">Third Content</div>
+    </ion-accordion> -->
+  </ion-accordion-group>
+
+  <!-- <ion-list>
+    <ion-item> Change Password </ion-item>
+  </ion-list> -->
+
+  <!-- <ion-button fill="outline" expand="block">Add Product</ion-button> -->
+
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
 </ion-content>

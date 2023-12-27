@@ -14,14 +14,13 @@
   <div>
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Lala-G ki Dukan</ion-card-title>
+        <ion-card-title>Laala-G ki Dukan</ion-card-title>
         <ion-card-subtitle>Welcome Lala-G</ion-card-subtitle>
       </ion-card-header>
 
       <ion-card-content>
         <div class="ion-padding" slot="content">
           <form [formGroup]="myForm" (ngSubmit)="login()">
-            <!-- <ion-item> -->
             <ion-input
               formControlName="username"
               labelPlacement="floating"
@@ -32,9 +31,7 @@
                 <ion-text color="danger"> *</ion-text>
               </div>
             </ion-input>
-            <!-- </ion-item> -->
             <br />
-            <!-- <ion-item> -->
             <ion-input
               labelPlacement="floating"
               type="password"
@@ -45,7 +42,6 @@
                 <ion-text color="danger" required="true"> *</ion-text>
               </div>
             </ion-input>
-            <!-- </ion-item> -->
 
             <br />
 
@@ -69,8 +65,6 @@
     </ion-card>
   </div>
 </ion-content>
-
-<!-- <ion-loading trigger="open-loading" message="Loading..."></ion-loading> -->
 
 <ion-alert
   [isOpen]="isAlertOpen"

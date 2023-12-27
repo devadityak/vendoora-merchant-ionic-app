@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
-// import { LoadingController } from '@ionic/angular';
 import {
   IonHeader,
   IonToolbar,
@@ -54,7 +53,7 @@ export class LoginPage {
     private router: Router,
     private service: ApiService,
     private fb: FormBuilder,
-    private loadingService: LoadingService // private loadingCtrl: LoadingController
+    private loadingService: LoadingService
   ) {
     this.myForm = this.fb.group({
       username: ['admin@admin.com', [Validators.required, Validators.email]],
@@ -84,15 +83,6 @@ export class LoginPage {
       });
     }
   }
-
-  // async showLoading() {
-  //   const loading = await this.loadingCtrl.create({
-  //     message: 'Loading...',
-  //     // duration: 3000,
-  //   });
-
-  //   loading.present();
-  // }
 
   isAlertOpen = false;
   alertButtons = ['Dismiss'];

@@ -47,8 +47,6 @@ export class Tab3Page {
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
-
   private values: string[] = ['first', 'second', 'third'];
 
   accordionGroupChange = (ev: any) => {

@@ -14,6 +14,12 @@ export class ApiService {
     return this.http.post(url + 'user/login', data, { headers: headers });
   }
 
+  getCategory() {
+    const url = environment.apiUrl;
+    const headers = this.getHeaders();
+    return this.http.get(url + 'category', { headers: headers });
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json',

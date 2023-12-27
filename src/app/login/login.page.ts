@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
@@ -46,7 +46,7 @@ import {
     ReactiveFormsModule,
   ],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   myForm: any;
 
   constructor(
@@ -60,8 +60,6 @@ export class LoginPage implements OnInit {
       password: ['pass123', [Validators.required]],
     });
   }
-
-  ngOnInit() {}
 
   login() {
     console.log(this.myForm);

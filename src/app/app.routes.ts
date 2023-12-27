@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './gaurd/auth.guard';
+import { AuthGuard } from './guard/auth.guard';
 import { LoginPage } from './login/login.page';
 
 export const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '',

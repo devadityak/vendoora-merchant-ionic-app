@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../service/api.service';
-import { LoadingController } from '@ionic/angular';
+// import { LoadingController } from '@ionic/angular';
 import {
   IonHeader,
   IonToolbar,
@@ -20,6 +20,7 @@ import {
   IonCardContent,
   IonInput,
 } from '@ionic/angular/standalone';
+import { LoadingService } from '../service/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,7 @@ export class LoginPage {
     private router: Router,
     private service: ApiService,
     private fb: FormBuilder,
-    private loadingCtrl: LoadingController
+    private loadingService: LoadingService // private loadingCtrl: LoadingController
   ) {
     this.myForm = this.fb.group({
       username: ['admin@admin.com', [Validators.required, Validators.email]],
@@ -64,11 +65,11 @@ export class LoginPage {
   login() {
     console.log(this.myForm);
     if (this.myForm.valid) {
-      this.showLoading();
+      this.loadingService.showLoading();
       this.service.login(this.myForm.value).subscribe({
         next: (res: any) => {
           console.log('hi', res);
-          this.loadingCtrl.dismiss();
+          this.loadingService.dismissLoading();
 
           if (res.message === 'Warning') {
             this.setOpen(true, res.showMsg);
@@ -77,21 +78,21 @@ export class LoginPage {
           }
         },
         error: (err) => {
-          this.loadingCtrl.dismiss();
+          this.loadingService.dismissLoading();
           this.setOpen(true, err);
         },
       });
     }
   }
 
-  async showLoading() {
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
-      // duration: 3000,
-    });
+  // async showLoading() {
+  //   const loading = await this.loadingCtrl.create({
+  //     message: 'Loading...',
+  //     // duration: 3000,
+  //   });
 
-    loading.present();
-  }
+  //   loading.present();
+  // }
 
   isAlertOpen = false;
   alertButtons = ['Dismiss'];

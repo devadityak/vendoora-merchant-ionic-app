@@ -19,7 +19,7 @@
         (ionChange)="categorySelected($event.target.value)"
         placeholder="Select Category"
       >
-        <div slot="label">Category <ion-text color="danger">*</ion-text></div>
+        <div slot="label">Category11 <ion-text color="danger">*</ion-text></div>
         @for (category of categories; track $index) {
         <ion-select-option [value]="category"
           >{{category.categoryName}}</ion-select-option
@@ -47,28 +47,45 @@
         <ion-select-option value="orange">Orange</ion-select-option>
       </ion-select>
     </ion-item>
-
     <br />
 
-    <ion-button expand="block" (click)="addPhotoToGallery()">
-      Select Product Images
-    </ion-button>
-    <br />
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="photoService.selectImg_1()">
+            1st Image
+          </ion-button>
+          <ion-img [src]="photoService.img1.dataUrl"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" (click)="photoService.selectImg_2()">
+            2nd Image
+          </ion-button>
+          <ion-img [src]="photoService.img2.dataUrl"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="photoService.selectImg_3()">
+            3rd Image
+          </ion-button>
+          <ion-img [src]="photoService.img3.dataUrl"></ion-img>
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" (click)="photoService.selectImg_4()">
+            4th Image
+          </ion-button>
+          <ion-img [src]="photoService.img4.dataUrl"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
     <ion-content>
       <ion-grid>
         <ion-row>
-          @for (photo of photoService.photos; track $index) {
           <ion-col size="6">
-            <ion-img [src]="photo.webviewPath"></ion-img>
+            <ion-img [src]="photoService.photos.dataUrl"></ion-img>
           </ion-col>
-          }
-          <!-- <ion-col
-            size="6"
-            ngFor="let photo of photoService.photos; index as position"
-          >
-            <ion-img [src]="photo.webviewPath"></ion-img>
-          </ion-col> -->
         </ion-row>
       </ion-grid>
 

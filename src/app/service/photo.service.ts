@@ -12,61 +12,87 @@ import { Preferences } from '@capacitor/preferences';
   providedIn: 'root',
 })
 export class PhotoService {
-  photos: any;
+  photos: any = { dataUrl: 'assets/img/demo.png' };
+  img1: any = { dataUrl: 'assets/img/demo.png' };
+  img2: any = { dataUrl: 'assets/img/demo.png' };
+  img3: any = { dataUrl: 'assets/img/demo.png' };
+  img4: any = { dataUrl: 'assets/img/demo.png' };
+  photoOptions = {
+    resultType: CameraResultType.DataUrl,
+    source: CameraSource.Photos,
+    quality: 50,
+    allowEditing: false,
+  };
   constructor() {} // private camera: Camera
 
   public async takePicture2() {
     try {
       // Take a photo
-      const img = await Camera.getPhoto({
-        resultType: CameraResultType.Base64,
-        source: CameraSource.Prompt,
-        quality: 90,
-        allowEditing: true,
+      let img = await Camera.getPhoto({
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos,
+        quality: 50,
+        allowEditing: false,
       });
+      // alert('123');
+      // alert('img - ' + JSON.stringify(img));
+      this.photos = img;
 
-      console.log(img.base64String);
-      this.photos = img.dataUrl;
+      // const path = String(img.webPath);
+      // const file = await Filesystem.readFile({
+      //   path,
+      //   directory: Directory.Data,
+      // });
 
-      const blobData = this.dataURItoBlob(String(img.base64String));
+      // Convert the file data to a base64 string
+      // const base64Data = file.data;
+
+      // Display the selected image
+      // this.photos = `data:image/jpeg;base64,${base64Data}`;
+      // this.photos = String(img.dataUrl);
+      // this.photos = img;
+
+      // blob conversion .....
+      // const blobData = this.dataURItoBlob(String(img.base64String));
 
       // Create FormData
-      const formData = new FormData();
-      formData.append('file', blobData, 'image.jpg');
+      //   const formData = new FormData();
+      //   formData.append('file', blobData, 'image.jpg');
     } catch (error) {
       console.error('Error taking picture', error);
     }
   }
-
-  public async takePicture() {
-    const image = Camera.getPhoto({
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Prompt,
-      quality: 100,
-      allowEditing: false,
-    });
-
-    this.photos = (await image).dataUrl;
+  public async selectImg_1() {
+    let tempImg = await Camera.getPhoto(this.photoOptions);
+    this.img1 = tempImg;
   }
 
-  // takePicture() {
-  //   const options: CameraOptions = {
-  //     quality: 100,
-  //     destinationType: this.camera.DestinationType.DATA_URL,
-  //     encodingType: this.camera.EncodingType.JPEG,
-  //     mediaType: this.camera.MediaType.PICTURE,
-  //   };
+  public async selectImg_2() {
+    let tempImg = await Camera.getPhoto(this.photoOptions);
+    this.img2 = tempImg;
+  }
 
-  //   this.camera.getPicture(options).then(
-  //     (imageData: any) => {
-  //       // imageData is a base64 encoded string
-  //       console.log(imageData);
-  //     },
-  //     (err: any) => {
-  //       console.error('Error taking picture', err);
-  //     }
-  //   );
-  // }
+  public async selectImg_3() {
+    let tempImg = await Camera.getPhoto(this.photoOptions);
+    this.img3 = tempImg;
+  }
+
+  public async selectImg_4() {
+    let tempImg = await Camera.getPhoto({
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Photos,
+      quality: 50,
+      allowEditing: false,
+      //
+      // encodingTyp
+      // e: Photo.,
+      //  this.camera.EncodingType.JPEG,
+      // mediaType: this.camera.MediaType.PICTURE,
+      // destinationType: this.camera.DestinationType.DATA_URL,
+    });
+
+    this.img4 = tempImg;
+  }
 
   private dataURItoBlob(dataURI: string): Blob {
     const byteString = atob(dataURI.split(',')[1]);

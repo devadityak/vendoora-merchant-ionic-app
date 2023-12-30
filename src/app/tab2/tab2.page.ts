@@ -57,9 +57,13 @@ export class Tab2Page {
     public photoService: PhotoService,
     private apiService: ApiService,
     private loadingService: LoadingService
-  ) {}
+  ) {
+    this.callCategoryApi();
+  }
 
-  ionViewDidEnter() {
+  ionViewDidEnter() {}
+
+  callCategoryApi() {
     this.loadingService.showLoading();
     this.apiService.getCategory().subscribe({
       next: (res: any) => {
@@ -91,6 +95,10 @@ export class Tab2Page {
   }
 
   addPhotoToGallery() {
-    this.photoService.takePicture();
+    this.photoService.takePicture2();
+  }
+
+  selectImg_2() {
+    this.photoService.selectImg_2();
   }
 }

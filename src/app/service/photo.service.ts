@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   Camera,
@@ -7,6 +8,7 @@ import {
 } from '@capacitor/camera';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Preferences } from '@capacitor/preferences';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -17,22 +19,76 @@ export class PhotoService {
   img2: any = { dataUrl: 'assets/img/demo.png' };
   img3: any = { dataUrl: 'assets/img/demo.png' };
   img4: any = { dataUrl: 'assets/img/demo.png' };
+
   photoOptions = {
-    resultType: CameraResultType.DataUrl,
+    width: 600,
+    height: 600,
+    // resultType: CameraResultType.DataUrl,
+    resultType: CameraResultType.Base64,
+
     source: CameraSource.Photos,
-    quality: 50,
+    quality: 20,
     allowEditing: false,
+    format: 'jpeg',
+    // limit: 1,
   };
-  constructor() {} // private camera: Camera
+
+  constructor(private http: HttpClient) {} // private camera: Camera
+
+  createProduct(data: any, prodImg1: any) {
+    const url = environment.apiUrl + 'product/create-product';
+    const headers = new HttpHeaders({
+      // Authorization: 'Bearer ' + String(token),
+    });
+    console.log('data -', data);
+    console.log('this.img1 -', prodImg1);
+
+    let formDataObj = new FormData();
+    // loop to convert all the data into formData
+    Object.entries(data).forEach(([key, value]) => {
+      let tempVal = String(value);
+      formDataObj.append(key, tempVal);
+    });
+    // formDataObj.append('img1', prodImg1);
+    formDataObj.append('img1', this.img2);
+
+    return this.http.post<any>(url, formDataObj, { headers: headers });
+  }
+
+  // createProduct2(data: any) {
+  //   const url = environment.apiUrl + 'product/create-product';
+  //   const headers = new HttpHeaders({
+  //     // Authorization: 'Bearer ' + String(token),
+  //   });
+  //   console.log('data -', data);
+
+  //   let formDataObj = new FormData();
+  //   formDataObj.append('hello', 'hello1');
+  //   formDataObj.append('img1', data);
+  //   formDataObj.append('img2', data);
+
+  //   console.log('formData', formDataObj);
+  //   return this.http.post<any>(url, formDataObj, { headers: headers });
+  // }
+
+  getHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+  }
 
   public async takePicture2() {
     try {
       // Take a photo
       let img = await Camera.getPhoto({
+        quality: 20,
+        width: 600,
+        height: 600,
+
         resultType: CameraResultType.DataUrl,
         source: CameraSource.Photos,
-        quality: 50,
-        allowEditing: false,
+
+        allowEditing: true,
       });
       // alert('123');
       // alert('img - ' + JSON.stringify(img));

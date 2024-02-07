@@ -5,6 +5,7 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
+  IonAlert,
   IonIcon,
   IonInput,
   IonItem,
@@ -15,7 +16,6 @@ import {
   IonCol,
   IonRow,
   IonGrid,
-  // IonFab,
   IonImg,
   IonButtons,
   IonTextarea,
@@ -23,6 +23,7 @@ import {
 import { PhotoService } from '../service/photo.service';
 import { ApiService } from '../service/api.service';
 import { LoadingService } from '../service/loading.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab2',
@@ -35,6 +36,7 @@ import { LoadingService } from '../service/loading.service';
     IonToolbar,
     IonTitle,
     IonContent,
+    IonAlert,
     IonIcon,
     IonInput,
     IonItem,
@@ -45,23 +47,90 @@ import { LoadingService } from '../service/loading.service';
     IonCol,
     IonRow,
     IonGrid,
-    // IonFab,
     IonImg,
     IonButtons,
     IonTextarea,
+    ReactiveFormsModule,
   ],
 })
 export class Tab2Page {
+  myForm: any;
   categories: any;
+  subCategories: any;
+  brands: any;
+
   constructor(
     public photoService: PhotoService,
     private apiService: ApiService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private fb: FormBuilder
   ) {
+    this.myForm = this.fb.group({
+      category: ['', [Validators.required]],
+      subCategory: ['', [Validators.required]],
+      brand: ['', [Validators.required]],
+      productImg1: ['', [Validators.required]],
+      productImg2: ['', []],
+      productImg3: ['', []],
+      productImg4: ['', []],
+      productName: ['hello', [Validators.required]],
+      productDescription: ['hello', [Validators.required]],
+      productKeyPoints: ['hello', [Validators.required]],
+      mrp: ['345', [Validators.required]],
+      sp: ['34', [Validators.required]],
+    });
+
     this.callCategoryApi();
   }
 
-  ionViewDidEnter() {}
+  file2: any;
+  fileChanged(event: any) {
+    this.file2 = event.target.files[0];
+  }
+
+  productImg1: any;
+  img1Add(event: any) {
+    console.log('e-', event);
+    this.productImg1 = event.target.files[0];
+    console.log('path - ', this.myForm.value.productImg1);
+
+    console.log('productImg1 - ', this.productImg1);
+    // alert('as-' + JSON.stringify(this.myForm.value.productImg1));
+  }
+
+  // submitPic() {
+  //   this.photoService.createProduct2(this.file2).subscribe({
+  //     next: (res) => {
+  //       console.log('res', res);
+  //     },
+  //     error: (err) => {
+  //       console.log('err', err);
+  //     },
+  //   });
+  // }
+
+  submit() {
+    console.log('hi', this.myForm);
+    if (this.myForm.status === 'INVALID') {
+      this.setOpen(true, 'Invalid Data');
+    }
+    //  else if (
+    //   this.photoService.img1.dataUrl === 'assets/img/demo.png' ||
+    //   null ||
+    //   undefined ||
+    //   ''
+    // ) {
+    //   this.setOpen(true, 'Need to select at lest one Product picture');
+    // }
+    else {
+      this.photoService
+        .createProduct(this.myForm.value, this.productImg1)
+        .subscribe({
+          next: (res) => {},
+          error: (err) => {},
+        });
+    }
+  }
 
   callCategoryApi() {
     this.loadingService.showLoading();
@@ -72,20 +141,22 @@ export class Tab2Page {
       },
       error: (err) => {
         this.loadingService.dismissLoading();
+        this.setOpen(true, err);
       },
     });
   }
 
-  categorySelected(e: any) {
+  callSubCategoryApi(e: any) {
     console.log(e);
     this.loadingService.showLoading();
     this.apiService.getCategory().subscribe({
       next: (res: any) => {
-        // this.categories = res.data;
+        this.subCategories = res.data;
         this.loadingService.dismissLoading();
       },
       error: (err) => {
         this.loadingService.dismissLoading();
+        this.setOpen(true, err);
       },
     });
   }
@@ -94,11 +165,12 @@ export class Tab2Page {
     return `${maxLength - inputLength} characters remaining`;
   }
 
-  addPhotoToGallery() {
-    this.photoService.takePicture2();
-  }
+  isAlertOpen = false;
+  alertButtons = ['Dismiss'];
+  alertMsg = '';
 
-  selectImg_2() {
-    this.photoService.selectImg_2();
+  setOpen(isOpen: boolean, msg: any) {
+    this.isAlertOpen = isOpen;
+    this.alertMsg = msg;
   }
 }

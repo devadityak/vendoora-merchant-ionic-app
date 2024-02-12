@@ -61,30 +61,28 @@
       <ion-grid>
         <!-- test -->
 
-        <ion-row>
+        <!-- <ion-row>
           <ion-col>
+            <ion-label>1st Image</ion-label>
+            <br />
+            <br />
             <ion-input
               type="file"
               expand="block"
               (change)="img1Add($event)"
               formControlName="productImg1"
             ></ion-input>
-            @if (myForm.value.productImg1 !== '') {
-            <ion-img [src]="myForm.value.productImg1"></ion-img>
-            } @else{
-            <ion-img src="assets/img/demo.png"></ion-img>
-            }
           </ion-col>
           <ion-col>
             <ion-button expand="block" (click)="photoService.selectImg_2()">
               2nd Image
             </ion-button>
+
             <ion-img [src]="photoService.img2.dataUrl"></ion-img>
-            <ion-img [src]="photoService.img2.Base64"></ion-img>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
         <!-- test ends -->
-        <!-- <ion-row>
+        <ion-row>
           <ion-col>
             <ion-button expand="block" (click)="photoService.selectImg_1()">
               1st Image
@@ -97,9 +95,9 @@
             </ion-button>
             <ion-img [src]="photoService.img2.dataUrl"></ion-img>
           </ion-col>
-        </ion-row> -->
+        </ion-row>
         <!-- new row -->
-        <!-- <ion-row>
+        <ion-row>
           <ion-col>
             <ion-button expand="block" (click)="photoService.selectImg_3()">
               3rd Image
@@ -112,11 +110,11 @@
             </ion-button>
             <ion-img [src]="photoService.img4.dataUrl"></ion-img>
           </ion-col>
-        </ion-row> -->
+        </ion-row>
         <!-- row ends -->
       </ion-grid>
 
-      <ion-content>
+      <!-- <ion-content>
         <ion-grid>
           <ion-row>
             <ion-col size="6">
@@ -125,8 +123,7 @@
           </ion-row>
         </ion-grid>
 
-        <!-- ion-fab markup  -->
-      </ion-content>
+      </ion-content> -->
 
       <ion-item>
         <ion-input

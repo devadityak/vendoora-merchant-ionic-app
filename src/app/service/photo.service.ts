@@ -4,44 +4,46 @@ import {
   Camera,
   CameraResultType,
   CameraSource,
-  Photo,
+  // ImageOptions,
+  // Photo,
 } from '@capacitor/camera';
-import { Filesystem, Directory } from '@capacitor/filesystem';
-import { Preferences } from '@capacitor/preferences';
+// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+// import { Filesystem, Directory } from '@capacitor/filesystem';
+// import { Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PhotoService {
-  photos: any = { dataUrl: 'assets/img/demo.png' };
-  img1: any = { dataUrl: 'assets/img/demo.png' };
-  img2: any = { dataUrl: 'assets/img/demo.png' };
-  img3: any = { dataUrl: 'assets/img/demo.png' };
-  img4: any = { dataUrl: 'assets/img/demo.png' };
+  demoImgUrl = 'assets/img/demo.png';
+  img1: any = { dataUrl: this.demoImgUrl };
+  img2: any = { dataUrl: this.demoImgUrl };
+  img3: any = { dataUrl: this.demoImgUrl };
+  img4: any = { dataUrl: this.demoImgUrl };
 
   photoOptions = {
-    width: 600,
-    height: 600,
-    // resultType: CameraResultType.DataUrl,
-    resultType: CameraResultType.Base64,
-
+    // width: 600,
+    // height: 600,
+    resultType: CameraResultType.DataUrl,
     source: CameraSource.Photos,
     quality: 20,
     allowEditing: false,
+    // mediaType: CameraResultType. this.camera.MediaType.PICTURE,
+    // encodingType: ImageOptions. Camera. .EncodingType.JPEG,
     format: 'jpeg',
-    // limit: 1,
+    // webUseInput: true,
+    limit: 1,
   };
 
-  constructor(private http: HttpClient) {} // private camera: Camera
+  constructor(private http: HttpClient) {}
 
   createProduct(data: any, prodImg1: any) {
     const url = environment.apiUrl + 'product/create-product';
     const headers = new HttpHeaders({
       // Authorization: 'Bearer ' + String(token),
     });
-    console.log('data -', data);
-    console.log('this.img1 -', prodImg1);
 
     let formDataObj = new FormData();
     // loop to convert all the data into formData
@@ -49,27 +51,24 @@ export class PhotoService {
       let tempVal = String(value);
       formDataObj.append(key, tempVal);
     });
-    // formDataObj.append('img1', prodImg1);
-    formDataObj.append('img1', this.img2);
+
+    formDataObj.append('img1', this.img1.blob);
+    formDataObj.append('img2', this.img2.blob);
+    formDataObj.append('img3', this.img3.blob);
+    formDataObj.append('img4', this.img4.blob);
+    // testing ....
+    // let pImages = [
+    //   this.img1.blob,
+    //   this.img2.blob,
+    //   this.img3.blob,
+    //   this.img4.blob,
+    // ];
+    // formDataObj.append(`pImages${1}`, this.img1.blob);
+    // formDataObj.append(`pImages${2}`, this.img2.blob);
+    // testing ends .....
 
     return this.http.post<any>(url, formDataObj, { headers: headers });
   }
-
-  // createProduct2(data: any) {
-  //   const url = environment.apiUrl + 'product/create-product';
-  //   const headers = new HttpHeaders({
-  //     // Authorization: 'Bearer ' + String(token),
-  //   });
-  //   console.log('data -', data);
-
-  //   let formDataObj = new FormData();
-  //   formDataObj.append('hello', 'hello1');
-  //   formDataObj.append('img1', data);
-  //   formDataObj.append('img2', data);
-
-  //   console.log('formData', formDataObj);
-  //   return this.http.post<any>(url, formDataObj, { headers: headers });
-  // }
 
   getHeaders() {
     return new HttpHeaders({
@@ -77,77 +76,33 @@ export class PhotoService {
     });
   }
 
-  public async takePicture2() {
-    try {
-      // Take a photo
-      let img = await Camera.getPhoto({
-        quality: 20,
-        width: 600,
-        height: 600,
-
-        resultType: CameraResultType.DataUrl,
-        source: CameraSource.Photos,
-
-        allowEditing: true,
-      });
-      // alert('123');
-      // alert('img - ' + JSON.stringify(img));
-      this.photos = img;
-
-      // const path = String(img.webPath);
-      // const file = await Filesystem.readFile({
-      //   path,
-      //   directory: Directory.Data,
-      // });
-
-      // Convert the file data to a base64 string
-      // const base64Data = file.data;
-
-      // Display the selected image
-      // this.photos = `data:image/jpeg;base64,${base64Data}`;
-      // this.photos = String(img.dataUrl);
-      // this.photos = img;
-
-      // blob conversion .....
-      // const blobData = this.dataURItoBlob(String(img.base64String));
-
-      // Create FormData
-      //   const formData = new FormData();
-      //   formData.append('file', blobData, 'image.jpg');
-    } catch (error) {
-      console.error('Error taking picture', error);
-    }
-  }
   public async selectImg_1() {
-    let tempImg = await Camera.getPhoto(this.photoOptions);
+    const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img1 = tempImg;
+    this.img1.blob = this.dataURItoBlob(String(tempImg.dataUrl));
+    if (!this.imgSizeCheck(this.img1.blob)) {
+      alert('img size should be less than 1MB');
+      this.img1.blob = '';
+      this.img1.dataUrl = this.demoImgUrl;
+    }
   }
 
   public async selectImg_2() {
-    let tempImg = await Camera.getPhoto(this.photoOptions);
+    const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img2 = tempImg;
+    this.img2.blob = this.dataURItoBlob(String(tempImg.dataUrl));
   }
 
   public async selectImg_3() {
-    let tempImg = await Camera.getPhoto(this.photoOptions);
+    const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img3 = tempImg;
+    this.img3.blob = this.dataURItoBlob(String(tempImg.dataUrl));
   }
 
   public async selectImg_4() {
-    let tempImg = await Camera.getPhoto({
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Photos,
-      quality: 50,
-      allowEditing: false,
-      //
-      // encodingTyp
-      // e: Photo.,
-      //  this.camera.EncodingType.JPEG,
-      // mediaType: this.camera.MediaType.PICTURE,
-      // destinationType: this.camera.DestinationType.DATA_URL,
-    });
-
+    const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img4 = tempImg;
+    this.img4.blob = this.dataURItoBlob(String(tempImg.dataUrl));
   }
 
   private dataURItoBlob(dataURI: string): Blob {
@@ -160,5 +115,13 @@ export class PhotoService {
     }
 
     return new Blob([uint8Array], { type: 'image/jpeg' });
+  }
+
+  imgSizeCheck(img: any) {
+    if (img.size < 539821) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

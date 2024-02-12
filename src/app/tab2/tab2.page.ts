@@ -19,6 +19,7 @@ import {
   IonImg,
   IonButtons,
   IonTextarea,
+  IonLabel,
 } from '@ionic/angular/standalone';
 import { PhotoService } from '../service/photo.service';
 import { ApiService } from '../service/api.service';
@@ -31,6 +32,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrls: ['tab2.page.scss'],
   standalone: true,
   imports: [
+    IonLabel,
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -66,13 +68,22 @@ export class Tab2Page {
     private fb: FormBuilder
   ) {
     this.myForm = this.fb.group({
-      category: ['', [Validators.required]],
-      subCategory: ['', [Validators.required]],
-      brand: ['', [Validators.required]],
-      productImg1: ['', [Validators.required]],
-      productImg2: ['', []],
-      productImg3: ['', []],
-      productImg4: ['', []],
+      category: [
+        '',
+        //  [Validators.required]
+      ],
+      subCategory: [
+        '',
+        //  [Validators.required]
+      ],
+      brand: [
+        '',
+        // [Validators.required]
+      ],
+      // productImg1: ['', [Validators.required]],
+      // productImg2: ['', []],
+      // productImg3: ['', []],
+      // productImg4: ['', []],
       productName: ['hello', [Validators.required]],
       productDescription: ['hello', [Validators.required]],
       productKeyPoints: ['hello', [Validators.required]],
@@ -86,6 +97,7 @@ export class Tab2Page {
   file2: any;
   fileChanged(event: any) {
     this.file2 = event.target.files[0];
+    // this.file2.imgPath = this.myForm.value.productImg1;
   }
 
   productImg1: any;
@@ -126,7 +138,9 @@ export class Tab2Page {
       this.photoService
         .createProduct(this.myForm.value, this.productImg1)
         .subscribe({
-          next: (res) => {},
+          next: (res) => {
+            console.log('res', res);
+          },
           error: (err) => {},
         });
     }

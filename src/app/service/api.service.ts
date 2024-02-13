@@ -20,6 +20,19 @@ export class ApiService {
     return this.http.get(url + 'category', { headers: headers });
   }
 
+  getSubCatNBrandsByCatId(id: any) {
+    const url = environment.apiUrl;
+    const headers = this.getHeaders();
+    const data = {
+      catId: id,
+    };
+    return this.http.post(
+      url + 'category/all-brands-and-sub-cat-by-cat-id',
+      data,
+      { headers: headers }
+    );
+  }
+
   getHeaders() {
     return new HttpHeaders({
       'Content-Type': 'application/json',

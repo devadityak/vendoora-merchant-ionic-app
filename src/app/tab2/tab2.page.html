@@ -22,10 +22,10 @@
           (ionChange)="callSubCategoryApi($event.target.value)"
           placeholder="Select Category"
           formControlName="category"
+          interface="popover"
+          #tempCategory
         >
-          <div slot="label">
-            Category11 <ion-text color="danger">*</ion-text>
-          </div>
+          <div slot="label">Category <ion-text color="danger">*</ion-text></div>
           @for (category of categories; track $index) {
           <ion-select-option [value]="category.id"
             >{{category.categoryName}}</ion-select-option
@@ -38,22 +38,37 @@
         <ion-select
           formControlName="subCategory"
           placeholder="Select Sub-Category"
+          interface="popover"
         >
           <div slot="label">
             Sub-Category <ion-text color="danger">*</ion-text>
           </div>
-          <ion-select-option value="apple">Apple</ion-select-option>
+
+          @for (subCat of subCategories; track $index) {
+          <ion-select-option [value]="subCat.id"
+            >{{subCat.subCategoryName}}</ion-select-option
+          >
+          }
+
+          <!-- <ion-select-option value="apple">Apple</ion-select-option>
           <ion-select-option value="banana">Banana</ion-select-option>
-          <ion-select-option value="orange">Orange</ion-select-option>
+          <ion-select-option value="orange">Orange</ion-select-option> -->
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-select formControlName="brand" placeholder="Select Brand">
           <div slot="label">Brand <ion-text color="danger">*</ion-text></div>
-          <ion-select-option value="apple">Apple</ion-select-option>
+
+          @for (brand of brands; track $index) {
+          <ion-select-option [value]="brand.id"
+            >{{brand.brandName}}</ion-select-option
+          >
+          }
+
+          <!-- <ion-select-option value="apple">Apple</ion-select-option>
           <ion-select-option value="banana">Banana</ion-select-option>
-          <ion-select-option value="orange">Orange</ion-select-option>
+          <ion-select-option value="orange">Orange</ion-select-option> -->
         </ion-select>
       </ion-item>
       <br />

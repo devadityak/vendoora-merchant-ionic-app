@@ -57,9 +57,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class Tab2Page {
   myForm: any;
-  categories: any;
-  subCategories: any;
-  brands: any;
+  categories: any = [];
+  subCategories: any = [];
+  brands: any = [];
 
   constructor(
     public photoService: PhotoService,
@@ -68,22 +68,9 @@ export class Tab2Page {
     private fb: FormBuilder
   ) {
     this.myForm = this.fb.group({
-      category: [
-        '',
-        //  [Validators.required]
-      ],
-      subCategory: [
-        '',
-        //  [Validators.required]
-      ],
-      brand: [
-        '',
-        // [Validators.required]
-      ],
-      // productImg1: ['', [Validators.required]],
-      // productImg2: ['', []],
-      // productImg3: ['', []],
-      // productImg4: ['', []],
+      category: ['', [Validators.required]],
+      subCategory: ['', [Validators.required]],
+      brand: ['', [Validators.required]],
       productName: ['hello', [Validators.required]],
       productDescription: ['hello', [Validators.required]],
       productKeyPoints: ['hello', [Validators.required]],
@@ -92,12 +79,6 @@ export class Tab2Page {
     });
 
     this.callCategoryApi();
-  }
-
-  file2: any;
-  fileChanged(event: any) {
-    this.file2 = event.target.files[0];
-    // this.file2.imgPath = this.myForm.value.productImg1;
   }
 
   productImg1: any;
@@ -110,19 +91,8 @@ export class Tab2Page {
     // alert('as-' + JSON.stringify(this.myForm.value.productImg1));
   }
 
-  // submitPic() {
-  //   this.photoService.createProduct2(this.file2).subscribe({
-  //     next: (res) => {
-  //       console.log('res', res);
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     },
-  //   });
-  // }
-
   submit() {
-    console.log('hi', this.myForm);
+    console.log('myForm', this.myForm);
     if (this.myForm.status === 'INVALID') {
       this.setOpen(true, 'Invalid Data');
     }
@@ -161,11 +131,13 @@ export class Tab2Page {
   }
 
   callSubCategoryApi(e: any) {
-    console.log(e);
+    this.brands = [];
+    this.subCategories = [];
     this.loadingService.showLoading();
-    this.apiService.getCategory().subscribe({
+    this.apiService.getSubCatNBrandsByCatId(e).subscribe({
       next: (res: any) => {
-        this.subCategories = res.data;
+        this.brands = res.brands;
+        this.subCategories = res.subCategory;
         this.loadingService.dismissLoading();
       },
       error: (err) => {

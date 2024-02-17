@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Add Product</ion-title>
@@ -57,7 +61,11 @@
       </ion-item>
 
       <ion-item>
-        <ion-select formControlName="brand" placeholder="Select Brand">
+        <ion-select
+          formControlName="brand"
+          interface="popover"
+          placeholder="Select Brand"
+        >
           <div slot="label">Brand <ion-text color="danger">*</ion-text></div>
 
           @for (brand of brands; track $index) {
@@ -178,6 +186,20 @@
       </ion-item>
 
       <br />
+      <ion-item>
+        <ion-select
+          placeholder="Select Currency"
+          formControlName="currency"
+          interface="popover"
+          #tempCategory
+        >
+          <div slot="label">Currency <ion-text color="danger">*</ion-text></div>
+          <ion-select-option value="INR">in INR ₹</ion-select-option>
+          <ion-select-option value="USD">in USD $</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <br />
 
       <ion-item>
         <ion-input
@@ -187,7 +209,7 @@
           value=""
         >
           <div slot="label">
-            Price ( MRP in ₹ ) <ion-text color="danger"> *</ion-text>
+            Price ( MRP ) <ion-text color="danger"> *</ion-text>
           </div>
         </ion-input>
       </ion-item>
@@ -200,7 +222,7 @@
           value=""
         >
           <div slot="label">
-            Price ( SP in ₹ ) <ion-text color="danger"> *</ion-text>
+            Selling Price <ion-text color="danger"> *</ion-text>
           </div>
         </ion-input>
       </ion-item>

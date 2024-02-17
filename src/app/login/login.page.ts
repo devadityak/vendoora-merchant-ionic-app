@@ -20,6 +20,7 @@ import {
   IonInput,
 } from '@ionic/angular/standalone';
 import { LoadingService } from '../service/loading.service';
+import { StorageService } from '../service/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,8 @@ export class LoginPage {
     private router: Router,
     private service: ApiService,
     private fb: FormBuilder,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private storageService: StorageService
   ) {
     this.myForm = this.fb.group({
       username: ['admin@admin.com', [Validators.required, Validators.email]],
@@ -73,6 +75,7 @@ export class LoginPage {
           if (res.message === 'Warning') {
             this.setOpen(true, res.showMsg);
           } else {
+            this.storageService.setToken(res.token);
             this.router.navigateByUrl('/tabs');
           }
         },
@@ -92,4 +95,13 @@ export class LoginPage {
     this.isAlertOpen = isOpen;
     this.alertMsg = msg;
   }
+
+  // removeTokenTest() {
+  //   this.storageService.removeToken();
+  // }
+
+  // getTokenTest() {
+  //   const t = this.storageService.getToken();
+  //   alert(t);
+  // }
 }

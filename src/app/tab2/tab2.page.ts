@@ -20,6 +20,8 @@ import {
   IonButtons,
   IonTextarea,
   IonLabel,
+  IonRefresher,
+  IonRefresherContent,
 } from '@ionic/angular/standalone';
 import { PhotoService } from '../service/photo.service';
 import { ApiService } from '../service/api.service';
@@ -51,6 +53,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
     IonGrid,
     IonImg,
     IonButtons,
+    IonRefresher,
+    IonRefresherContent,
     IonTextarea,
     ReactiveFormsModule,
   ],
@@ -76,6 +80,7 @@ export class Tab2Page {
       productKeyPoints: ['hello', [Validators.required]],
       mrp: ['345', [Validators.required]],
       sp: ['34', [Validators.required]],
+      currency: ['34', [Validators.required]],
     });
 
     this.callCategoryApi();
@@ -158,5 +163,12 @@ export class Tab2Page {
   setOpen(isOpen: boolean, msg: any) {
     this.isAlertOpen = isOpen;
     this.alertMsg = msg;
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      event.target.complete();
+      this.myForm.reset();
+    }, 1500);
   }
 }

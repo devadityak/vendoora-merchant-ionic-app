@@ -12,6 +12,8 @@ import {
 // import { Filesystem, Directory } from '@capacitor/filesystem';
 // import { Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -37,12 +39,17 @@ export class PhotoService {
     limit: 1,
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   createProduct(data: any, prodImg1: any) {
     const url = environment.apiUrl + 'product/create-product';
+    const token = this.storageService.getToken();
+
     const headers = new HttpHeaders({
-      // Authorization: 'Bearer ' + String(token),
+      Authorization: 'Bearer ' + String(token),
     });
 
     let formDataObj = new FormData();

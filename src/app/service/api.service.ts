@@ -10,6 +10,7 @@ export class ApiService {
 
   login(data: any) {
     const url = environment.apiUrl;
+    data.loginRole = 'vendor';
     const headers = this.getHeaders();
     return this.http.post(url + 'user/login', data, { headers: headers });
   }

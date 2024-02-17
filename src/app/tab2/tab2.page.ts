@@ -80,7 +80,7 @@ export class Tab2Page {
       productKeyPoints: ['hello', [Validators.required]],
       mrp: ['345', [Validators.required]],
       sp: ['34', [Validators.required]],
-      currency: ['34', [Validators.required]],
+      currency: ['INR', [Validators.required]],
     });
 
     this.callCategoryApi();

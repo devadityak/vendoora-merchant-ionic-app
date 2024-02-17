@@ -19,6 +19,7 @@ import {
   IonInput,
   IonText,
 } from '@ionic/angular/standalone';
+import { StorageService } from '../service/storage.service';
 
 @Component({
   selector: 'app-tab3',
@@ -45,7 +46,7 @@ export class Tab3Page {
     username: new FormControl(['sdfs'], Validators.required),
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private storageService: StorageService) {}
 
   private values: string[] = ['first', 'second', 'third'];
 
@@ -64,6 +65,7 @@ export class Tab3Page {
 
   logout() {
     console.log('hi');
+    this.storageService.removeToken();
     this.router.navigateByUrl('/login');
   }
 }

@@ -58,10 +58,17 @@ export class LoginPage {
     private storageService: StorageService
   ) {
     this.myForm = this.fb.group({
-      username: ['admin@admin.com', [Validators.required, Validators.email]],
+      username: [
+        'kumarelectronics55@gmail.com',
+        [Validators.required, Validators.email],
+      ],
       password: ['pass123', [Validators.required]],
     });
   }
+  // admin@admin.com
+  // pass123
+  // kumarelectronics55@gmail.com
+  // pass123
 
   login() {
     console.log(this.myForm);

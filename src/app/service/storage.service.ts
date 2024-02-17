@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StorageService {
   constructor() {}
-  key = 'laala-g-jwtToken';
+  key = environment.jwtKey;
 
   setToken(token: any) {
     try {

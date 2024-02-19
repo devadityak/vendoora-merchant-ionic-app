@@ -43,10 +43,14 @@ import { StorageService } from '../service/storage.service';
 })
 export class Tab3Page {
   myForm = new FormGroup({
-    username: new FormControl(['sdfs'], Validators.required),
+    oldPassword: new FormControl([''], Validators.required),
+    newPassword: new FormControl([''], Validators.required),
+    retypeNewPassword: new FormControl([''], Validators.required),
   });
 
   constructor(private router: Router, private storageService: StorageService) {}
+
+  submit() {}
 
   private values: string[] = ['first', 'second', 'third'];
 

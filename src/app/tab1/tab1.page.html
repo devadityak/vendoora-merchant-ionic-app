@@ -14,7 +14,7 @@
       <ion-title size="large">Products</ion-title>
     </ion-toolbar>
   </ion-header>
-  <!-- shimmer -->
+  <!-- shimmer starts -->
   <ion-list *ngIf="!loaded">
     <ion-list-header>
       <ion-skeleton-text
@@ -107,20 +107,48 @@
   <!-- shimmer ends -->
   <div *ngIf="loaded">
     <ion-searchbar></ion-searchbar>
-    <div *ngFor="let arr of arrs">
+    <div *ngFor="let product of products">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Card Title</ion-card-title>
-          <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          <ion-card-title>{{product.productName}}</ion-card-title>
+          <ion-card-subtitle>
+            <span style="text-decoration: line-through">
+              {{product.currency}} {{product.productMrp}} </span
+            >{{product.currency}} {{product.productSp}}
+          </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
-          Here's a small text description for the card content. Nothing more,
-          nothing less.
+          <img class="product-img" [src]="url + product.productImg1" />
+          <!-- <img class="product-img" [src]="url + product.productImg2" /> -->
+
+          <!-- <img [src]="url + product.productImg2" />
+          <img [src]="url + product.productImg3" />
+          <img [src]="url + product.productImg4" /> -->
+          <!-- Here's a small text description for the card content. Nothing more,
+          nothing less. -->
+          <br />
+          <br />
+          {{product.productKeyPoints}}
+          <br />
+          <br />
+          <label
+            ><b>STATUS</b> : @if (product.reviewedAndPublished === false) {
+            <span style="color: yellow">UNDER-REVIEW</span>
+
+            } @else if (product.blocked === true) {
+            <span style="color: red">BLOCKED</span>
+            } @else {
+            <span style="color: green">PUBLISHED</span>
+            }
+          </label>
+
+          <!-- STATUS : PUBLISHED -->
         </ion-card-content>
 
-        <ion-button fill="clear">Action 1</ion-button>
-        <ion-button fill="clear">Action 2</ion-button>
+        <ion-button fill="clear">Edit</ion-button>
+        <ion-button fill="clear">Deactivate</ion-button>
+        <ion-button fill="clear">Mark as Sold</ion-button>
       </ion-card>
     </div>
   </div>

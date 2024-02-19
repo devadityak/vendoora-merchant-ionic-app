@@ -64,7 +64,10 @@ export class LoginPage {
       ],
       password: ['pass123', [Validators.required]],
     });
+
+    this.checkTokenAndLogin();
   }
+
   // admin@admin.com
   // pass123
   // kumarelectronics55@gmail.com
@@ -101,6 +104,13 @@ export class LoginPage {
   setOpen(isOpen: boolean, msg: any) {
     this.isAlertOpen = isOpen;
     this.alertMsg = msg;
+  }
+
+  checkTokenAndLogin() {
+    const verify = this.storageService.getToken();
+    if (verify !== null) {
+      this.router.navigateByUrl('/tabs');
+    }
   }
 
   // removeTokenTest() {

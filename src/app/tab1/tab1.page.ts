@@ -22,6 +22,7 @@ import {
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-tab1',
@@ -55,7 +56,8 @@ import { ApiService } from '../service/api.service';
 })
 export class Tab1Page implements OnInit {
   loaded = false;
-
+  products: any;
+  url = environment.apiUrl;
   constructor(private service: ApiService) {}
 
   ngOnInit() {
@@ -64,8 +66,9 @@ export class Tab1Page implements OnInit {
 
   getProducts() {
     this.loaded = false;
-    this.service.getCategory().subscribe({
+    this.service.getProductsByVendor().subscribe({
       next: (res: any) => {
+        this.products = res.data;
         this.loaded = true;
       },
       error: (err) => {
@@ -83,6 +86,5 @@ export class Tab1Page implements OnInit {
     }, 1500);
   }
 
-  arrs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  loadArrs = [1, 2, 3, 4];
+  loadArrays = [1, 2, 3, 4];
 }

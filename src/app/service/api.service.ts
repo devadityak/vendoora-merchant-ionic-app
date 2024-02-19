@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   login(data: any) {
     const url = environment.apiUrl;
@@ -19,6 +23,14 @@ export class ApiService {
     const url = environment.apiUrl;
     const headers = this.getHeaders();
     return this.http.get(url + 'category', { headers: headers });
+  }
+
+  getProductsByVendor() {
+    const url = environment.apiUrl;
+    const headers = this.getHeadersWithJWT();
+    return this.http.post(url + 'product/all-products-by-vendor-id', '', {
+      headers: headers,
+    });
   }
 
   getSubCatNBrandsByCatId(id: any) {
@@ -38,5 +50,15 @@ export class ApiService {
     return new HttpHeaders({
       'Content-Type': 'application/json',
     });
+  }
+
+  getHeadersWithJWT() {
+    const token = this.storageService.getToken();
+
+    return new HttpHeaders({
+      Authorization: 'Bearer ' + String(token),
+    });
+
+    // return headers;
   }
 }

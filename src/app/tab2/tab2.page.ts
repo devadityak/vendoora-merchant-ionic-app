@@ -75,11 +75,11 @@ export class Tab2Page {
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
       brand: ['', [Validators.required]],
-      productName: ['hello', [Validators.required]],
-      productDescription: ['hello', [Validators.required]],
-      productKeyPoints: ['hello', [Validators.required]],
-      mrp: ['345', [Validators.required]],
-      sp: ['34', [Validators.required]],
+      productName: ['', [Validators.required]],
+      productDescription: ['', [Validators.required]],
+      productKeyPoints: ['', [Validators.required]],
+      mrp: ['', [Validators.required]],
+      sp: ['', [Validators.required]],
       currency: ['INR', [Validators.required]],
     });
 

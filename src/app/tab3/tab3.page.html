@@ -24,7 +24,7 @@
         <form [formGroup]="myForm">
           <ion-item>
             <ion-input
-              formControlName="username"
+              formControlName="oldPassword"
               labelPlacement="floating"
               value=""
             >
@@ -36,7 +36,11 @@
           </ion-item>
           <br />
           <ion-item>
-            <ion-input labelPlacement="floating" value="">
+            <ion-input
+              formControlName="newPassword"
+              labelPlacement="floating"
+              value=""
+            >
               <div slot="label">
                 New Password
                 <ion-text color="danger" required="true"> *</ion-text>
@@ -45,7 +49,11 @@
           </ion-item>
           <br />
           <ion-item>
-            <ion-input labelPlacement="floating" value="">
+            <ion-input
+              formControlName="retypeNewPassword"
+              labelPlacement="floating"
+              value=""
+            >
               <div slot="label">
                 Retype New Password
                 <ion-text color="danger"> *</ion-text>

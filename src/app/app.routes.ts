@@ -16,6 +16,12 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginPage,
+    pathMatch: 'full',
+    // loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
+  },
+  {
+    path: '**',
+    component: LoginPage,
     // loadComponent: () => import('./login/login.page').then((m) => m.LoginPage),
   },
 ];

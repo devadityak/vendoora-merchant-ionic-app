@@ -13,7 +13,7 @@ import {
 // import { Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
-import { Preferences } from '@capacitor/preferences';
+// import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',

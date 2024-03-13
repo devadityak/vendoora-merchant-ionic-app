@@ -28,9 +28,8 @@ import { AlertController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { ApiService } from '../service/api.service';
 import { Camera } from '@capacitor/camera';
-// import { Capacitor } from '@capacitor/core';
-
-// import { AndroidPermissions } from '@ionic-native/android-permissions';
+import { Browser } from '@capacitor/browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -61,6 +60,7 @@ import { Camera } from '@capacitor/camera';
 export class LoginPage {
   myForm: any;
   private lastBackTime = 0;
+  url = environment.apiUrl;
 
   constructor(
     private router: Router,
@@ -109,6 +109,14 @@ export class LoginPage {
     await Geolocation.requestPermissions();
   }
 
+  async openBrowser() {
+    // const openCapacitorSite = async () => {
+    //   await Browser.open({ url: 'https://google.com/' });
+    // };
+
+    await Browser.open({ url: 'https://google.com/' });
+  }
+
   async getCurrentLocation() {
     // const printCurrentPosition = async () => {
     //   const coordinates = await Geolocation.getCurrentPosition();
@@ -120,7 +128,7 @@ export class LoginPage {
 
     const coordinates = await Geolocation.getCurrentPosition();
     await Toast.show({
-      text: 'GeoLocation! -' + coordinates,
+      text: 'GeoLocation! -' + JSON.stringify(coordinates),
       duration: 'long',
     });
   }
@@ -233,7 +241,7 @@ export class LoginPage {
       next: (res: any) => {
         this.loadingService.dismissLoading();
 
-        this.setOpen(true, res.data);
+        this.setOpen(true, JSON.stringify(res.data));
       },
       error: (err) => {
         this.loadingService.dismissLoading();
@@ -242,7 +250,7 @@ export class LoginPage {
         //   text: 'Error',
         // });
 
-        this.setOpen(true, 'res.data');
+        this.setOpen(true, JSON.stringify(err));
       },
     });
   }

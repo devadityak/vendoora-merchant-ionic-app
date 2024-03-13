@@ -65,8 +65,20 @@
               color="danger"
               expand="block"
               (click)="testApi()"
-              >TEST API 4</ion-button
+              >TEST API 4
+            </ion-button>
+            <br />
+            <ion-button
+              type="button"
+              fill="outline"
+              color="danger"
+              expand="block"
+              (click)="openBrowser()"
             >
+              Browser test
+            </ion-button>
+
+            <h2>{{url}}</h2>
           </form>
         </div>
       </ion-card-content>

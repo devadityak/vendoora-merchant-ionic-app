@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpClientModule,
+} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +17,17 @@ export class ApiService {
     private storageService: StorageService
   ) {}
 
-  login(data: any) {
+  login(data: any): Observable<any> {
     const url = environment.apiUrl;
     data.loginRole = 'vendor';
     const headers = this.getHeaders();
-    return this.http.post(url + 'user/login', data, { headers: headers });
+    return this.http.post<any>(url + 'user/login', data, { headers: headers });
   }
 
-  testApi() {
+  testApi(): Observable<any> {
     const url = environment.apiUrl;
     const headers = this.getHeaders();
-    return this.http.get(url, { headers: headers });
+    return this.http.get<any>(url, { headers: headers });
   }
 
   getCategory() {

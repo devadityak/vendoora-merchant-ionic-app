@@ -59,16 +59,40 @@
               >Forgot Password</ion-button
             >
 
-            <ion-button
+            <!-- <ion-button
+              type="button"
+              fill="outline"
+              color="warning"
+              expand="block"
+              (click)="loading1()"
+              >Loading 1 <ion-spinner name="lines"></ion-spinner>
+            </ion-button> -->
+
+            <!-- <ion-button
+              type="button"
+              fill="outline"
+              color="warning"
+              expand="block"
+              (click)="loading2()"
+              >Loading 2</ion-button
+            > -->
+
+            <!-- <ion-button id="open-loading">Show Loading</ion-button> -->
+            <ion-loading
+              trigger="open-loading"
+              message="Dismissing test"
+            ></ion-loading>
+
+            <!-- <ion-button
               type="button"
               fill="outline"
               color="danger"
               expand="block"
               (click)="testApi()"
               >TEST API 4
-            </ion-button>
+            </ion-button> -->
             <br />
-            <ion-button
+            <!-- <ion-button
               type="button"
               fill="outline"
               color="danger"
@@ -76,9 +100,9 @@
               (click)="openBrowser()"
             >
               Browser test
-            </ion-button>
+            </ion-button> -->
 
-            <h2>{{url}}</h2>
+            <!-- <h2>{{url}}</h2> -->
           </form>
         </div>
       </ion-card-content>

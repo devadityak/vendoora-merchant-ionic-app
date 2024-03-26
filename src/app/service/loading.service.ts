@@ -12,7 +12,6 @@ export class LoadingService {
       message: 'Loading...',
       // duration: 3000,
     });
-
     loading.present();
   }
 

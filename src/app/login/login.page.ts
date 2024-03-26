@@ -12,6 +12,9 @@ import {
   IonList,
   IonItem,
   IonText,
+  //
+  IonLoading,
+  IonSpinner,
   IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
@@ -19,7 +22,6 @@ import {
   IonInput,
   Platform,
 } from '@ionic/angular/standalone';
-import { LoadingService } from '../service/loading.service';
 import { StorageService } from '../service/storage.service';
 import { Toast } from '@capacitor/toast';
 import { App } from '@capacitor/app';
@@ -30,6 +32,8 @@ import { ApiService } from '../service/api.service';
 import { Camera } from '@capacitor/camera';
 import { Browser } from '@capacitor/browser';
 import { environment } from 'src/environments/environment';
+import { LoadingController } from '@ionic/angular';
+import { LoadingService } from '../service/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -52,7 +56,8 @@ import { environment } from 'src/environments/environment';
     IonCardSubtitle,
     IonCardContent,
     IonInput,
-
+    IonLoading,
+    IonSpinner,
     //
     ReactiveFormsModule,
   ],
@@ -67,17 +72,18 @@ export class LoginPage {
     private service: ApiService,
     private fb: FormBuilder,
     private loadingService: LoadingService,
+    private loadingCtrl: LoadingController,
     private storageService: StorageService,
     private platform: Platform,
     private alertController: AlertController
   ) {
     this.myForm = this.fb.group({
-      username: [
-        'kumarelectronics55@gmail.com',
-        [Validators.required, Validators.email],
-      ],
-      password: ['pass123', [Validators.required]],
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
+
+    // kumarelectronics55@gmail.com
+    // pass123
 
     this.getPermission();
     // Permissions.requestPermission('WRITE_EXTERNAL_STORAGE');
@@ -110,10 +116,6 @@ export class LoginPage {
   }
 
   async openBrowser() {
-    // const openCapacitorSite = async () => {
-    //   await Browser.open({ url: 'https://google.com/' });
-    // };
-
     await Browser.open({ url: 'https://google.com/' });
   }
 
@@ -137,7 +139,7 @@ export class LoginPage {
     // Network.addListener()
 
     const status = await Network.getStatus();
-    alert(JSON.stringify(status));
+    // alert(JSON.stringify(status));
 
     if (status.connected) {
       console.log('Connected to the internet');
@@ -234,27 +236,6 @@ export class LoginPage {
     }
   }
 
-  testApi() {
-    this.loadingService.showLoading();
-
-    this.service.testApi().subscribe({
-      next: (res: any) => {
-        this.loadingService.dismissLoading();
-
-        this.setOpen(true, JSON.stringify(res.data));
-      },
-      error: (err) => {
-        this.loadingService.dismissLoading();
-
-        // Toast.show({
-        //   text: 'Error',
-        // });
-
-        this.setOpen(true, JSON.stringify(err));
-      },
-    });
-  }
-
   // removeTokenTest() {
   //   this.storageService.removeToken();
   // }
@@ -263,4 +244,16 @@ export class LoginPage {
   //   const t = this.storageService.getToken();
   //   alert(t);
   // }
+
+  loading1() {
+    this.loadingService.showLoading();
+  }
+
+  async loading2() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Dismissing after 3 seconds...',
+      duration: 3000,
+    });
+    loading.present();
+  }
 }

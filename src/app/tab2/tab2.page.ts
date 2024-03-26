@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import {
   IonHeader,
   IonToolbar,
@@ -21,12 +22,14 @@ import {
   IonTextarea,
   IonLabel,
   IonRefresher,
+  IonLoading,
   IonRefresherContent,
 } from '@ionic/angular/standalone';
 import { PhotoService } from '../service/photo.service';
 import { ApiService } from '../service/api.service';
 import { LoadingService } from '../service/loading.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Dialog } from '@capacitor/dialog';
 
 @Component({
   selector: 'app-tab2',
@@ -35,6 +38,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   standalone: true,
   imports: [
     IonLabel,
+    IonLoading,
     CommonModule,
     IonHeader,
     IonToolbar,
@@ -69,7 +73,8 @@ export class Tab2Page {
     public photoService: PhotoService,
     private apiService: ApiService,
     private loadingService: LoadingService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private loadingCtrl: LoadingController
   ) {
     this.myForm = this.fb.group({
       category: ['', [Validators.required]],
@@ -110,13 +115,26 @@ export class Tab2Page {
     //   this.setOpen(true, 'Need to select at lest one Product picture');
     // }
     else {
+      this.loadingCtrl.create({ message: 'Loading...' });
       this.photoService
         .createProduct(this.myForm.value, this.productImg1)
         .subscribe({
           next: (res) => {
-            console.log('res', res);
+            this.loadingCtrl.dismiss();
+            this.myForm.reset();
+
+            Dialog.alert({
+              title: 'Success',
+              message: 'New Product is Added and Sent for Review',
+            });
           },
-          error: (err) => {},
+          error: (err) => {
+            this.loadingCtrl.dismiss();
+            Dialog.alert({
+              title: 'Alert',
+              message: 'Error - ' + JSON.stringify(err),
+            });
+          },
         });
     }
   }

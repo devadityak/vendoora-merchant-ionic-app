@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   // apiUrl: 'http://192.168.29.36:3000/',
   // apiUrl: 'http://localhost:3000/',
-  apiUrl: 'http://laalag.com:3000/',
+  apiUrl: 'https://api.laalag.com/',
   jwtKey: 'laala-g-jwtToken',
 };
 

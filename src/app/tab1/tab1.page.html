@@ -119,14 +119,68 @@
         </ion-card-header>
 
         <ion-card-content>
-          <img class="product-img" [src]="url + product.productImg1" />
-          <!-- <img class="product-img" [src]="url + product.productImg2" /> -->
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                @if (product.productImg1 !== "/uploads/demo/demoProductImg.png")
+                {
+                <ion-thumbnail>
+                  <ion-img
+                    size="auto"
+                    [src]="url + product.productImg1"
+                    [alt]="product.productName"
+                  ></ion-img>
+                </ion-thumbnail>
+                } @else {
+                <ion-img src="assets/img/demo.png"></ion-img>
+                }
+              </ion-col>
+              <ion-col>
+                @if (product.productImg2 !== "/uploads/demo/demoProductImg.png")
+                {
 
-          <!-- <img [src]="url + product.productImg2" />
-          <img [src]="url + product.productImg3" />
-          <img [src]="url + product.productImg4" /> -->
-          <!-- Here's a small text description for the card content. Nothing more,
-          nothing less. -->
+                <ion-img
+                  size="auto"
+                  [src]="url + product.productImg2"
+                  [alt]="product.productName"
+                ></ion-img>
+                } @else {
+                <ion-thumbnail>
+                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
+                </ion-thumbnail>
+                }
+              </ion-col>
+              <ion-col>
+                @if (product.productImg3 !== "/uploads/demo/demoProductImg.png")
+                {
+                <ion-img
+                  size="auto"
+                  [src]="url + product.productImg3"
+                  [alt]="product.productName"
+                ></ion-img>
+                } @else {
+                <ion-thumbnail>
+                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
+                </ion-thumbnail>
+                }
+              </ion-col>
+              <ion-col>
+                @if (product.productImg4 !== "/uploads/demo/demoProductImg.png")
+                {
+                <ion-img
+                  size="auto"
+                  [src]="url + product.productImg4"
+                  [alt]="product.productName"
+                ></ion-img>
+                } @else {
+                <ion-thumbnail>
+                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
+                </ion-thumbnail>
+                }
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
           <br />
           <br />
           {{product.productKeyPoints}}
@@ -146,9 +200,10 @@
           <!-- STATUS : PUBLISHED -->
         </ion-card-content>
 
-        <ion-button fill="clear">Edit</ion-button>
-        <ion-button fill="clear">Deactivate</ion-button>
-        <ion-button fill="clear">Mark as Sold</ion-button>
+        <ion-button color="primary" fill="outline">Edit</ion-button>
+        <ion-button color="warning" fill="outline">Deactivate</ion-button>
+        <ion-button color="tertiary" fill="outline">Mark as Sold</ion-button>
+        <!-- <ion-button color="warning" fill="outline">Deactivate</ion-button> -->
       </ion-card>
     </div>
   </div>

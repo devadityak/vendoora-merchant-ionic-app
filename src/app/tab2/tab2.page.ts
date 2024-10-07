@@ -102,7 +102,7 @@ export class Tab2Page {
   }
 
   submit() {
-    console.log('myForm', this.myForm);
+    // console.log('myForm', this.myForm);
     if (this.myForm.status === 'INVALID') {
       this.setOpen(true, 'Invalid Data');
     }
@@ -115,12 +115,15 @@ export class Tab2Page {
     //   this.setOpen(true, 'Need to select at lest one Product picture');
     // }
     else {
-      this.loadingCtrl.create({ message: 'Loading...' });
+      this.loadingService.showLoading();
+    
+      // this.loadingCtrl.create({ message: 'Loading...' });
       this.photoService
         .createProduct(this.myForm.value, this.productImg1)
         .subscribe({
           next: (res) => {
-            this.loadingCtrl.dismiss();
+            // this.loadingCtrl.dismiss();
+            this.loadingService.dismissLoading();
             this.myForm.reset();
 
             Dialog.alert({
@@ -129,7 +132,8 @@ export class Tab2Page {
             });
           },
           error: (err) => {
-            this.loadingCtrl.dismiss();
+            // this.loadingCtrl.dismiss();
+            this.loadingService.dismissLoading();
             Dialog.alert({
               title: 'Alert',
               message: 'Error - ' + JSON.stringify(err),

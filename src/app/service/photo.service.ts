@@ -4,16 +4,9 @@ import {
   Camera,
   CameraResultType,
   CameraSource,
-  // ImageOptions,
-  // Photo,
 } from '@capacitor/camera';
-// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
-// import { Filesystem, Directory } from '@capacitor/filesystem';
-// import { Preferences } from '@capacitor/preferences';
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
-// import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root',
@@ -24,17 +17,19 @@ export class PhotoService {
   img2: any = { dataUrl: this.demoImgUrl };
   img3: any = { dataUrl: this.demoImgUrl };
   img4: any = { dataUrl: this.demoImgUrl };
+  
 
   photoOptions = {
     // width: 600,
     // height: 600,
     resultType: CameraResultType.DataUrl,
+    // resultType: CameraResultType.Uri,
     source: CameraSource.Photos,
     quality: 20,
     allowEditing: false,
     // mediaType: CameraResultType. this.camera.MediaType.PICTURE,
     // encodingType: ImageOptions. Camera. .EncodingType.JPEG,
-    format: 'jpeg',
+    // format: 'jpeg',
     // webUseInput: true,
     limit: 1,
   };
@@ -44,7 +39,7 @@ export class PhotoService {
     private storageService: StorageService
   ) {}
 
-  createProduct(data: any, prodImg1: any) {
+  createProduct(data: any) {
     const url = environment.apiUrl + 'product/create-product';
     const token = this.storageService.getToken();
 
@@ -53,7 +48,8 @@ export class PhotoService {
     });
 
     let formDataObj = new FormData();
-    // loop to convert all the data into formData
+
+    //* loop to convert all the data into formData
     Object.entries(data).forEach(([key, value]) => {
       let tempVal = String(value);
       formDataObj.append(key, tempVal);
@@ -63,16 +59,6 @@ export class PhotoService {
     formDataObj.append('img2', this.img2.blob);
     formDataObj.append('img3', this.img3.blob);
     formDataObj.append('img4', this.img4.blob);
-    // testing ....
-    // let pImages = [
-    //   this.img1.blob,
-    //   this.img2.blob,
-    //   this.img3.blob,
-    //   this.img4.blob,
-    // ];
-    // formDataObj.append(`pImages${1}`, this.img1.blob);
-    // formDataObj.append(`pImages${2}`, this.img2.blob);
-    // testing ends .....
 
     return this.http.post<any>(url, formDataObj, { headers: headers });
   }
@@ -83,10 +69,21 @@ export class PhotoService {
     });
   }
 
+  // private async uriToFile(webPath: string): Promise<File> {
+  //   const response = await fetch(webPath);
+  //   const blob = await response.blob();
+  //   return new File([blob], `photo_${Date.now()}.jpeg`, {
+  //     type: 'image/jpeg',
+  //   });
+  // }
+
+
   public async selectImg_1() {
     const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img1 = tempImg;
     this.img1.blob = this.dataURItoBlob(String(tempImg.dataUrl));
+
+    //* check img size if large than 1MB then alert
     if (!this.imgSizeCheck(this.img1.blob)) {
       alert('img size should be less than 1MB');
       this.img1.blob = '';
@@ -98,20 +95,43 @@ export class PhotoService {
     const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img2 = tempImg;
     this.img2.blob = this.dataURItoBlob(String(tempImg.dataUrl));
+
+    //* check img size if large than 1MB then alert
+    if (!this.imgSizeCheck(this.img2.blob)) {
+      alert('img size should be less than 1MB');
+      this.img2.blob = '';
+      this.img2.dataUrl = this.demoImgUrl;
+    }
+
   }
 
   public async selectImg_3() {
     const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img3 = tempImg;
     this.img3.blob = this.dataURItoBlob(String(tempImg.dataUrl));
+
+    //* check img size if large than 1MB then alert
+    if (!this.imgSizeCheck(this.img3.blob)) {
+      alert('img size should be less than 1MB');
+      this.img3.blob = '';
+      this.img3.dataUrl = this.demoImgUrl;
+    }
   }
 
   public async selectImg_4() {
     const tempImg = await Camera.getPhoto(this.photoOptions);
     this.img4 = tempImg;
     this.img4.blob = this.dataURItoBlob(String(tempImg.dataUrl));
+
+    //* check img size if large than 1MB then alert
+    if (!this.imgSizeCheck(this.img4.blob)) {
+      alert('img size should be less than 1MB');
+      this.img4.blob = '';
+      this.img4.dataUrl = this.demoImgUrl;
+    }
   }
 
+  //* convert dataURI to blob
   private dataURItoBlob(dataURI: string): Blob {
     const byteString = atob(dataURI.split(',')[1]);
     const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -124,6 +144,7 @@ export class PhotoService {
     return new Blob([uint8Array], { type: 'image/jpeg' });
   }
 
+  //* check img size
   imgSizeCheck(img: any) {
     if (img.size < 539821) {
       return true;
@@ -131,4 +152,12 @@ export class PhotoService {
       return false;
     }
   }
+
+  //* reset all img thumbnails to default
+  resetImgData() {
+    this.img1 = { dataUrl: this.demoImgUrl };
+    this.img2 = { dataUrl: this.demoImgUrl };
+    this.img3 = { dataUrl: this.demoImgUrl };
+    this.img4 = { dataUrl: this.demoImgUrl };
+    }
 }

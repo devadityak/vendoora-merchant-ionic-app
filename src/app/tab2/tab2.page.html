@@ -15,8 +15,6 @@
     </ion-toolbar>
   </ion-header>
   <br />
-  <!-- <input type="file" (change)="fileChanged($event)" />
-  <button (click)="submitPic()">submit</button> -->
   <div class="ion-padding">
     <form [formGroup]="myForm" (ngSubmit)="submit()">
       <br />
@@ -54,9 +52,6 @@
           >
           }
 
-          <!-- <ion-select-option value="apple">Apple</ion-select-option>
-          <ion-select-option value="banana">Banana</ion-select-option>
-          <ion-select-option value="orange">Orange</ion-select-option> -->
         </ion-select>
       </ion-item>
 
@@ -78,29 +73,6 @@
       <br />
 
       <ion-grid>
-        <!-- test -->
-
-        <!-- <ion-row>
-          <ion-col>
-            <ion-label>1st Image</ion-label>
-            <br />
-            <br />
-            <ion-input
-              type="file"
-              expand="block"
-              (change)="img1Add($event)"
-              formControlName="productImg1"
-            ></ion-input>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" (click)="photoService.selectImg_2()">
-              2nd Image
-            </ion-button>
-
-            <ion-img [src]="photoService.img2.dataUrl"></ion-img>
-          </ion-col>
-        </ion-row> -->
-        <!-- test ends -->
         <ion-row>
           <ion-col>
             <ion-button expand="block" (click)="photoService.selectImg_1()">
@@ -133,17 +105,7 @@
         <!-- row ends -->
       </ion-grid>
 
-      <!-- <ion-content>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-img [src]="photoService.photos.dataUrl"></ion-img>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-
-      </ion-content> -->
-
+     
       <ion-item>
         <ion-input
           formControlName="productName"
@@ -152,7 +114,7 @@
         >
           <div slot="label">
             Product Name <ion-text color="danger"> *</ion-text>
-          </div>
+          </div>          
         </ion-input>
       </ion-item>
 

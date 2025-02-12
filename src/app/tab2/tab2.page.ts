@@ -7,7 +7,6 @@ import {
   IonTitle,
   IonContent,
   IonAlert,
-  IonIcon,
   IonInput,
   IonItem,
   IonSelectOption,
@@ -18,9 +17,8 @@ import {
   IonRow,
   IonGrid,
   IonImg,
-  IonButtons,
   IonTextarea,
-  IonLabel,
+  // IonLabel,
   IonRefresher,
   IonLoading,
   IonRefresherContent,
@@ -37,7 +35,7 @@ import { Dialog } from '@capacitor/dialog';
   styleUrls: ['tab2.page.scss'],
   standalone: true,
   imports: [
-    IonLabel,
+    // IonLabel,
     IonLoading,
     CommonModule,
     IonHeader,
@@ -45,7 +43,6 @@ import { Dialog } from '@capacitor/dialog';
     IonTitle,
     IonContent,
     IonAlert,
-    IonIcon,
     IonInput,
     IonItem,
     IonSelectOption,
@@ -56,7 +53,6 @@ import { Dialog } from '@capacitor/dialog';
     IonRow,
     IonGrid,
     IonImg,
-    IonButtons,
     IonRefresher,
     IonRefresherContent,
     IonTextarea,
@@ -76,55 +72,48 @@ export class Tab2Page {
     private fb: FormBuilder,
     private loadingCtrl: LoadingController
   ) {
+
     this.myForm = this.fb.group({
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
       brand: ['', [Validators.required]],
-      productName: ['', [Validators.required]],
-      productDescription: ['', [Validators.required]],
-      productKeyPoints: ['', [Validators.required]],
-      mrp: ['', [Validators.required]],
-      sp: ['', [Validators.required]],
+      productName: ['1', [Validators.required]],
+      productDescription: ['1', [Validators.required]],
+      productKeyPoints: ['1', [Validators.required]],
+      mrp: ['1', [Validators.required]],
+      sp: ['1', [Validators.required]],
       currency: ['INR', [Validators.required]],
     });
 
     this.callCategoryApi();
   }
 
-  productImg1: any;
-  img1Add(event: any) {
-    console.log('e-', event);
-    this.productImg1 = event.target.files[0];
-    console.log('path - ', this.myForm.value.productImg1);
+  // productImg1: any;
+  // img1Add(event: any) {
+  //   console.log('e-', event);
+  //   this.productImg1 = event.target.files[0];
+  //   console.log('path - ', this.myForm.value.productImg1);
 
-    console.log('productImg1 - ', this.productImg1);
-    // alert('as-' + JSON.stringify(this.myForm.value.productImg1));
-  }
+  //   console.log('productImg1 - ', this.productImg1);
+  //   // alert('as-' + JSON.stringify(this.myForm.value.productImg1));
+  // }
 
   submit() {
-    // console.log('myForm', this.myForm);
+    
     if (this.myForm.status === 'INVALID') {
       this.setOpen(true, 'Invalid Data');
     }
-    //  else if (
-    //   this.photoService.img1.dataUrl === 'assets/img/demo.png' ||
-    //   null ||
-    //   undefined ||
-    //   ''
-    // ) {
-    //   this.setOpen(true, 'Need to select at lest one Product picture');
-    // }
     else {
       this.loadingService.showLoading();
-    
       // this.loadingCtrl.create({ message: 'Loading...' });
       this.photoService
-        .createProduct(this.myForm.value, this.productImg1)
+        .createProduct(this.myForm.value)
         .subscribe({
           next: (res) => {
             // this.loadingCtrl.dismiss();
             this.loadingService.dismissLoading();
             this.myForm.reset();
+            this.photoService.resetImgData();
 
             Dialog.alert({
               title: 'Success',
@@ -134,6 +123,7 @@ export class Tab2Page {
           error: (err) => {
             // this.loadingCtrl.dismiss();
             this.loadingService.dismissLoading();
+            alert('Error - ' + JSON.stringify(err));
             Dialog.alert({
               title: 'Alert',
               message: 'Error - ' + JSON.stringify(err),
@@ -191,6 +181,10 @@ export class Tab2Page {
     setTimeout(() => {
       event.target.complete();
       this.myForm.reset();
+      this.photoService.resetImgData();
     }, 1500);
   }
+
+
+  
 }

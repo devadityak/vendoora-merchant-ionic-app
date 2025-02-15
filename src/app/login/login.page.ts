@@ -9,12 +9,11 @@ import {
   IonCard,
   IonAlert,
   IonButton,
-  IonList,
-  IonItem,
   IonText,
+  IonLabel,
   //
   IonLoading,
-  IonSpinner,
+  // IonSpinner,
   IonCardHeader,
   IonCardTitle,
   IonCardSubtitle,
@@ -48,8 +47,7 @@ import { LoadingService } from '../service/loading.service';
     IonCard,
     IonAlert,
     IonButton,
-    IonItem,
-    IonList,
+    IonLabel,
     IonText,
     IonCardHeader,
     IonCardTitle,
@@ -57,7 +55,7 @@ import { LoadingService } from '../service/loading.service';
     IonCardContent,
     IonInput,
     IonLoading,
-    IonSpinner,
+    // IonSpinner,
     //
     ReactiveFormsModule,
   ],
@@ -80,6 +78,7 @@ export class LoginPage {
     this.myForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
+      rememberMe: [false, [Validators.required]],
     });
 
     // kumarelectronics55@gmail.com
@@ -197,7 +196,7 @@ export class LoginPage {
   }
 
   login() {
-    // console.log(this.myForm);
+    console.log(this.myForm.value);
     if (this.myForm.valid) {
       this.loadingService.showLoading();
       this.service.login(this.myForm.value).subscribe({
@@ -255,5 +254,16 @@ export class LoginPage {
       duration: 3000,
     });
     loading.present();
+  }
+
+  rememberMe() {
+    // console.log(this.myForm.value);
+    // alert(this.myForm.value.rememberMe);
+    if (this.myForm.value.rememberMe) {
+      // this.storageService.setRememberMe(this.myForm.value.rememberMe);
+    } 
+    // else {
+    //   this.storageService.removeRememberMe();
+    // } 
   }
 }

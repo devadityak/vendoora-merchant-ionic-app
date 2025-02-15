@@ -7,6 +7,7 @@ import {
 import { environment } from 'src/environments/environment';
 import { StorageService } from './storage.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ import { Observable } from 'rxjs';
 export class ApiService {
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router,
   ) {}
 
   login(data: any): Observable<any> {
@@ -22,6 +24,12 @@ export class ApiService {
     data.loginRole = 'vendor';
     const headers = this.getHeaders();
     return this.http.post<any>(url + 'user/login', data, { headers: headers });
+  }
+
+  logout() {
+    console.log('logout');
+    // this.storageService.removeToken();
+    // this.router.navigateByUrl('/login');
   }
 
   testApi(): Observable<any> {

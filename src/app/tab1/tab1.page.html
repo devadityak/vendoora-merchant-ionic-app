@@ -210,3 +210,12 @@
 
   <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
+
+
+<ion-alert
+  [isOpen]="isAlertOpen"
+  header="Alert"
+  [message]="alertMsg"
+  [buttons]="alertButtons"
+  (didDismiss)="setOpen(false, '')"
+></ion-alert>

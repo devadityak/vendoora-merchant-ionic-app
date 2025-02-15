@@ -3,6 +3,7 @@ import {
   IonHeader,
   IonToolbar,
   IonTitle,
+  IonAlert,
   IonContent,
   IonImg,
   IonCard,
@@ -43,7 +44,7 @@ import { environment } from 'src/environments/environment';
     IonGrid,
     IonRow,
     IonCol,
-    //
+    IonAlert,
     IonRefresher,
     IonRefresherContent,
     IonList,
@@ -65,7 +66,7 @@ import { environment } from 'src/environments/environment';
 export class Tab1Page implements OnInit {
   loaded = false;
   products: any;
-  url = environment.apiUrl;
+  url = environment.imgUrl + environment.bucketName + '/';
   constructor(private service: ApiService) {}
 
   ngOnInit() {
@@ -73,6 +74,8 @@ export class Tab1Page implements OnInit {
   }
 
   getProducts() {
+    // console.log("test...");
+          
     this.loaded = false;
     this.service.getProductsByVendor().subscribe({
       next: (res: any) => {
@@ -80,9 +83,16 @@ export class Tab1Page implements OnInit {
         this.loaded = true;
       },
       error: (err) => {
-        this.loaded = false;
-      },
-    });
+        this.loaded = false;  
+        console.log("test1",  err.error);
+        if(err.error) {
+          console.log("test2",  err.error);
+          this.setOpen(true, "Session expired. Please login again.");
+          // alert("Session expired. Please login again.");
+          this.service.logout()
+      }
+        
+    }});
   }
 
   handleRefresh(event: any) {
@@ -95,4 +105,13 @@ export class Tab1Page implements OnInit {
   }
 
   loadArrays = [1, 2, 3, 4];
+
+  isAlertOpen = false;
+  alertButtons = ['Dismiss'];
+  alertMsg = '';
+  setOpen(isOpen: boolean, msg: any) {
+    this.isAlertOpen = isOpen;
+    this.alertMsg = msg;
+  }
+
 }

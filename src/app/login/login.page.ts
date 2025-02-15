@@ -10,7 +10,7 @@ import {
   IonAlert,
   IonButton,
   IonText,
-  IonLabel,
+  // IonLabel,
   //
   IonLoading,
   // IonSpinner,
@@ -49,7 +49,7 @@ import { LoadingService } from '../service/loading.service';
     IonAlert,
     IonCheckbox,
     IonButton,
-    IonLabel,
+    // IonLabel,
     IonText,
     IonCardHeader,
     IonCardTitle,

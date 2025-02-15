@@ -16,6 +16,7 @@ import {
   // IonSpinner,
   IonCardHeader,
   IonCardTitle,
+  IonCheckbox,
   IonCardSubtitle,
   IonCardContent,
   IonInput,
@@ -46,6 +47,7 @@ import { LoadingService } from '../service/loading.service';
     IonContent,
     IonCard,
     IonAlert,
+    IonCheckbox,
     IonButton,
     IonLabel,
     IonText,
@@ -78,7 +80,7 @@ export class LoginPage {
     this.myForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      rememberMe: [false, [Validators.required]],
+      rememberMe: [true, []],
     });
 
     // kumarelectronics55@gmail.com
@@ -196,7 +198,7 @@ export class LoginPage {
   }
 
   login() {
-    console.log(this.myForm.value);
+    // console.log(this.myForm.value);
     if (this.myForm.valid) {
       this.loadingService.showLoading();
       this.service.login(this.myForm.value).subscribe({

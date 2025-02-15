@@ -44,12 +44,8 @@
             </ion-input>
 
             <div style="text-align: right;" class="ion-padding " slot="content">
-            <ion-checkbox (click)="myForm.get('rememberMe').setValue(!myForm.get('rememberMe').value)"
-            type="checkbox"
-              formControlName="rememberMe"
-              color="primary"
-              >  <ion-label>Remember Me</ion-label>  </ion-checkbox> &nbsp;
-          </div>
+              <ion-checkbox formControlName="rememberMe">Remember Me</ion-checkbox>
+            </div>
 
 
             <ion-button type="submit" fill="outline" expand="block"

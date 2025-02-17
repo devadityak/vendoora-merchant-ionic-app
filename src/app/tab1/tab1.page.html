@@ -14,8 +14,9 @@
       <ion-title size="large">Products</ion-title>
     </ion-toolbar>
   </ion-header>
+
   <!-- shimmer starts -->
-  <ion-list *ngIf="!loaded">
+  <ion-list *ngIf="shimmerEffect">
     <ion-list-header>
       <ion-skeleton-text
         [animated]="true"
@@ -105,7 +106,9 @@
     </ion-item>
   </ion-list>
   <!-- shimmer ends -->
-  <div *ngIf="loaded">
+
+  
+  <div *ngIf="!shimmerEffect">
     <ion-searchbar></ion-searchbar>
     <div *ngFor="let product of products">
       <ion-card>
@@ -217,5 +220,9 @@
   header="Alert"
   [message]="alertMsg"
   [buttons]="alertButtons"
-  (didDismiss)="setOpen(false, '')"
+  [backdropDismiss]="backdropDismissOption"
+  (didDismiss)="setResult($event)"
 ></ion-alert>
+
+<!-- (didDismiss)="setOpen(false, '')" -->
+  

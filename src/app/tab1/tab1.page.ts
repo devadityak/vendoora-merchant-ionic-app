@@ -28,6 +28,8 @@ import {
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
 import { environment } from 'src/environments/environment';
+import type { OverlayEventDetail } from '@ionic/core';
+
 
 @Component({
   selector: 'app-tab1',
@@ -64,7 +66,7 @@ import { environment } from 'src/environments/environment';
   ],
 })
 export class Tab1Page implements OnInit {
-  loaded = false;
+  shimmerEffect = true;
   products: any;
   url = environment.imgUrl + environment.bucketName + '/';
   constructor(private service: ApiService) {}
@@ -76,21 +78,19 @@ export class Tab1Page implements OnInit {
   getProducts() {
     // console.log("test...");
           
-    this.loaded = false;
+    this.shimmerEffect = true;
     this.service.getProductsByVendor().subscribe({
       next: (res: any) => {
         this.products = res.data;
-        this.loaded = true;
+        this.shimmerEffect = false;
       },
       error: (err) => {
-        this.loaded = false;  
+        this.shimmerEffect = false;  
         console.log("test1",  err.error);
-        if(err.error) {
+        if(err.error.error === "jwt expired") {
           console.log("test2",  err.error);
           this.setOpen(true, "Session expired. Please login again.");
-          // alert("Session expired. Please login again.");
-          this.service.logout()
-      }
+          }
         
     }});
   }
@@ -99,7 +99,7 @@ export class Tab1Page implements OnInit {
     this.getProducts();
     setTimeout(() => {
       // Any calls to load data go here
-      // this.loaded = true;
+      // this.shimmerEffect = false;
       event.target.complete();
     }, 1500);
   }
@@ -107,11 +107,24 @@ export class Tab1Page implements OnInit {
   loadArrays = [1, 2, 3, 4];
 
   isAlertOpen = false;
-  alertButtons = ['Dismiss'];
+  alertButtons = [{
+    text: 'Logout',
+    role: 'logout',
+    handler: () => {
+      this.service.logout();
+    },
+  }];
   alertMsg = '';
+  backdropDismissOption = false;
+
   setOpen(isOpen: boolean, msg: any) {
     this.isAlertOpen = isOpen;
     this.alertMsg = msg;
+  }
+
+  setResult(event: CustomEvent<OverlayEventDetail>) {
+    console.log(`Dismissed with role: ${event.detail.role}`);
+    // this.setOpen(true, "Session expired. Please login again.");
   }
 
 }

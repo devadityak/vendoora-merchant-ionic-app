@@ -28,8 +28,8 @@ export class ApiService {
 
   logout() {
     console.log('logout');
-    // this.storageService.removeToken();
-    // this.router.navigateByUrl('/login');
+    this.storageService.removeToken();
+    this.router.navigateByUrl('/login');
   }
 
   testApi(): Observable<any> {

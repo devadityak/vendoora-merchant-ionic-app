@@ -1,219 +1,191 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Products </ion-title>
+<ion-header [translucent]="true" class="vendoora-header">
+  <ion-toolbar class="vendoora-toolbar">
+    <ion-title class="vendoora-title">
+      <ion-icon name="cube-outline" class="title-icon"></ion-icon>
+      My Products
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="vendoora-content">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Products</ion-title>
+  <ion-header collapse="condense" class="vendoora-header-collapse">
+    <ion-toolbar class="vendoora-toolbar">
+      <ion-title size="large" class="vendoora-title-large">
+        <ion-icon name="cube-outline" class="title-icon"></ion-icon>
+        My Products
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- shimmer starts -->
-  <ion-list *ngIf="shimmerEffect">
-    <ion-list-header>
-      <ion-skeleton-text
-        [animated]="true"
-        style="width: 80px"
-      ></ion-skeleton-text>
-    </ion-list-header>
+  <div class="vendoora-container">
+    <!-- Search Section -->
+    <div class="search-section" *ngIf="!shimmerEffect">
+      <ion-searchbar 
+        placeholder="Search your products..."
+        class="vendoora-searchbar"
+        show-clear-button="focus"
+        animated="true"
+      ></ion-searchbar>
+    </div>
 
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-      </ion-thumbnail>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 80%"
+    <!-- Shimmer Loading Effect -->
+    <div class="shimmer-container" *ngIf="shimmerEffect">
+      <div class="shimmer-header">
+        <ion-skeleton-text 
+          [animated]="true" 
+          style="width: 200px; height: 24px;"
+          class="shimmer-title"
+        ></ion-skeleton-text>
+      </div>
+      
+      <div class="shimmer-cards">
+        <div class="shimmer-card" *ngFor="let item of loadArrays">
+          <ion-skeleton-text 
+            [animated]="true" 
+            style="width: 100%; height: 200px;"
+            class="shimmer-image"
           ></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 60%"
-          ></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%"
-          ></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
+          <div class="shimmer-content">
+            <ion-skeleton-text 
+              [animated]="true" 
+              style="width: 80%; height: 20px;"
+            ></ion-skeleton-text>
+            <ion-skeleton-text 
+              [animated]="true" 
+              style="width: 60%; height: 16px;"
+            ></ion-skeleton-text>
+            <ion-skeleton-text 
+              [animated]="true" 
+              style="width: 40%; height: 16px;"
+            ></ion-skeleton-text>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <br />
+    <!-- Products Grid -->
+    <div class="products-container" *ngIf="!shimmerEffect">
+      <div class="products-header">
+        <h2 class="products-title">
+          <ion-icon name="grid-outline" class="title-icon"></ion-icon>
+          Product Catalog
+        </h2>
+        <p class="products-subtitle">{{products?.length || 0}} products in your catalog</p>
+      </div>
 
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-      </ion-thumbnail>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 80%"
-          ></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 60%"
-          ></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%"
-          ></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-
-    <br />
-    <ion-item>
-      <ion-thumbnail slot="start">
-        <ion-skeleton-text [animated]="true"></ion-skeleton-text>
-      </ion-thumbnail>
-      <ion-label>
-        <h3>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 80%"
-          ></ion-skeleton-text>
-        </h3>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 60%"
-          ></ion-skeleton-text>
-        </p>
-        <p>
-          <ion-skeleton-text
-            [animated]="true"
-            style="width: 30%"
-          ></ion-skeleton-text>
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
-  <!-- shimmer ends -->
-
-  
-  <div *ngIf="!shimmerEffect">
-    <ion-searchbar></ion-searchbar>
-    <div *ngFor="let product of products">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{product.productName}}</ion-card-title>
-          <ion-card-subtitle>
-            <span style="text-decoration: line-through">
-              {{product.currency}} {{product.productMrp}} </span
-            >{{product.currency}} {{product.productSp}}
-          </ion-card-subtitle>
-        </ion-card-header>
-
-        <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                @if (product.productImg1 !== "/uploads/demo/demoProductImg.png")
-                {
-                <ion-thumbnail>
+      <div class="products-grid">
+        <div class="product-card" *ngFor="let product of products">
+          <div class="card-header">
+            <div class="product-images">
+              <div class="main-image">
+                @if (product.productImg1 !== "/uploads/demo/demoProductImg.png") {
                   <ion-img
-                    size="auto"
                     [src]="url + product.productImg1"
                     [alt]="product.productName"
+                    class="product-main-img"
                   ></ion-img>
-                </ion-thumbnail>
                 } @else {
-                <ion-img src="assets/img/demo.png"></ion-img>
+                  <ion-img 
+                    src="assets/img/demo.png" 
+                    class="product-main-img"
+                  ></ion-img>
                 }
-              </ion-col>
-              <ion-col>
-                @if (product.productImg2 !== "/uploads/demo/demoProductImg.png")
-                {
+              </div>
+              
+              <div class="thumbnail-images">
+                <div class="thumbnail" *ngFor="let img of [product.productImg2, product.productImg3, product.productImg4]; let i = index">
+                  @if (img !== "/uploads/demo/demoProductImg.png") {
+                    <ion-img
+                      [src]="url + img"
+                      [alt]="product.productName + ' ' + (i + 2)"
+                      class="product-thumbnail"
+                    ></ion-img>
+                  } @else {
+                    <ion-img 
+                      src="assets/img/demo.png" 
+                      class="product-thumbnail"
+                    ></ion-img>
+                  }
+                </div>
+              </div>
+            </div>
+            
+            <div class="status-badge" [ngClass]="getStatusClass(product)">
+              <ion-icon [name]="getStatusIcon(product)" class="status-icon"></ion-icon>
+              {{getStatusText(product)}}
+            </div>
+          </div>
 
-                <ion-img
-                  size="auto"
-                  [src]="url + product.productImg2"
-                  [alt]="product.productName"
-                ></ion-img>
-                } @else {
-                <ion-thumbnail>
-                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
-                </ion-thumbnail>
-                }
-              </ion-col>
-              <ion-col>
-                @if (product.productImg3 !== "/uploads/demo/demoProductImg.png")
-                {
-                <ion-img
-                  size="auto"
-                  [src]="url + product.productImg3"
-                  [alt]="product.productName"
-                ></ion-img>
-                } @else {
-                <ion-thumbnail>
-                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
-                </ion-thumbnail>
-                }
-              </ion-col>
-              <ion-col>
-                @if (product.productImg4 !== "/uploads/demo/demoProductImg.png")
-                {
-                <ion-img
-                  size="auto"
-                  [src]="url + product.productImg4"
-                  [alt]="product.productName"
-                ></ion-img>
-                } @else {
-                <ion-thumbnail>
-                  <ion-img size="auto" src="assets/img/demo.png"></ion-img>
-                </ion-thumbnail>
-                }
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+          <div class="card-content">
+            <div class="product-info">
+              <h3 class="product-name">{{product.productName}}</h3>
+              
+              <div class="product-pricing">
+                <span class="original-price">{{product.currency}} {{product.productMrp}}</span>
+                <span class="current-price">{{product.currency}} {{product.productSp}}</span>
+                <span class="discount-badge" *ngIf="product.productMrp > product.productSp">
+                  {{getDiscountPercentage(product)}}% OFF
+                </span>
+              </div>
+              
+              <div class="product-description">
+                <p class="key-points">{{product.productKeyPoints}}</p>
+              </div>
+            </div>
+          </div>
 
-          <br />
-          <br />
-          {{product.productKeyPoints}}
-          <br />
-          <br />
-          <label
-            ><b>STATUS</b> : @if (product.reviewedAndPublished === false) {
-            <span style="color: yellow">UNDER-REVIEW</span>
+          <div class="card-actions">
+            <ion-button 
+              fill="outline" 
+              class="action-button edit-button"
+              (click)="editProduct(product)"
+            >
+              <ion-icon name="create-outline" slot="start"></ion-icon>
+              Edit
+            </ion-button>
+            
+            <ion-button 
+              fill="outline" 
+              class="action-button deactivate-button"
+              (click)="deactivateProduct(product)"
+            >
+              <ion-icon name="pause-outline" slot="start"></ion-icon>
+              Deactivate
+            </ion-button>
+            
+            <ion-button 
+              fill="outline" 
+              class="action-button sold-button"
+              (click)="markAsSold(product)"
+            >
+              <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+              Mark as Sold
+            </ion-button>
+          </div>
+        </div>
+      </div>
 
-            } @else if (product.blocked === true) {
-            <span style="color: red">BLOCKED</span>
-            } @else {
-            <span style="color: green">PUBLISHED</span>
-            }
-          </label>
-
-          <!-- STATUS : PUBLISHED -->
-        </ion-card-content>
-
-        <ion-button color="primary" fill="outline">Edit</ion-button>
-        <ion-button color="warning" fill="outline">Deactivate</ion-button>
-        <ion-button color="tertiary" fill="outline">Mark as Sold</ion-button>
-        <!-- <ion-button color="warning" fill="outline">Deactivate</ion-button> -->
-      </ion-card>
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!shimmerEffect && (!products || products.length === 0)">
+        <ion-icon name="cube-outline" class="empty-icon"></ion-icon>
+        <h3 class="empty-title">No Products Yet</h3>
+        <p class="empty-subtitle">Start by adding your first product to showcase your inventory</p>
+        <ion-button 
+          fill="solid" 
+          class="add-product-button"
+          routerLink="/tabs/tab2"
+        >
+          <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+          Add Your First Product
+        </ion-button>
+      </div>
     </div>
   </div>
-
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>
-
 
 <ion-alert
   [isOpen]="isAlertOpen"
@@ -222,7 +194,6 @@
   [buttons]="alertButtons"
   [backdropDismiss]="backdropDismissOption"
   (didDismiss)="setResult($event)"
+  class="vendoora-alert"
 ></ion-alert>
-
-<!-- (didDismiss)="setOpen(false, '')" -->
   

@@ -1,0 +1,340 @@
+// Login page styles using global design system variables
+.login-content {
+  --background: var(--vendoora-gradient-primary);
+  position: relative;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--vendoora-space-5);
+  position: relative;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--vendoora-gradient-primary);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.login-title {
+  color: var(--vendoora-white);
+  font-weight: var(--vendoora-font-semibold);
+  font-size: var(--vendoora-text-xl);
+}
+
+// Brand section
+.brand-section {
+  text-align: center;
+  margin-bottom: var(--vendoora-space-8);
+  z-index: 2;
+  position: relative;
+}
+
+.logo-container {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--vendoora-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--vendoora-space-4);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.logo-icon {
+  font-size: var(--vendoora-text-5xl);
+  color: var(--vendoora-white);
+}
+
+.brand-title {
+  color: var(--vendoora-white);
+  font-size: var(--vendoora-text-5xl);
+  font-weight: var(--vendoora-font-bold);
+  margin: 0 0 var(--vendoora-space-2);
+  text-shadow: var(--vendoora-shadow-lg);
+}
+
+.brand-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--vendoora-text-base);
+  margin: 0;
+  font-weight: var(--vendoora-font-light);
+}
+
+// Login card
+.login-card-container {
+  width: 100%;
+  max-width: 400px;
+  z-index: 2;
+  position: relative;
+}
+
+.login-card {
+  background: var(--vendoora-card-background);
+  backdrop-filter: blur(20px);
+  border-radius: var(--vendoora-card-border-radius);
+  box-shadow: var(--vendoora-card-shadow);
+  border: var(--vendoora-card-border);
+  overflow: hidden;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-header {
+  text-align: center;
+  padding: var(--vendoora-space-8) var(--vendoora-space-8) var(--vendoora-space-4);
+  background: var(--vendoora-gradient-primary);
+  color: var(--vendoora-white);
+  margin: 0;
+}
+
+.card-title {
+  font-size: var(--vendoora-text-3xl);
+  font-weight: var(--vendoora-font-semibold);
+  margin: 0 0 var(--vendoora-space-2);
+  color: var(--vendoora-white);
+}
+
+.card-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--vendoora-text-base);
+  margin: 0;
+}
+
+.card-content {
+  padding: var(--vendoora-space-8);
+}
+
+// Form styles
+.login-form {
+  .input-group {
+    margin-bottom: var(--vendoora-space-6);
+  }
+
+  .custom-input {
+    --background: var(--vendoora-input-background);
+    --border-radius: var(--vendoora-input-border-radius);
+    --border-width: var(--vendoora-input-border-width);
+    --border-color: var(--vendoora-input-border-color);
+    --border-style: solid;
+    --padding-start: var(--vendoora-input-padding);
+    --padding-end: var(--vendoora-input-padding);
+    --padding-top: var(--vendoora-input-padding);
+    --padding-bottom: var(--vendoora-input-padding);
+    --color: var(--vendoora-text-primary);
+    --placeholder-color: var(--vendoora-text-muted);
+    transition: var(--vendoora-transition-base);
+    margin-bottom: var(--vendoora-space-2);
+
+    &.input-error {
+      --border-color: var(--vendoora-input-error-border-color);
+      --background: rgba(245, 61, 61, 0.05);
+    }
+
+    &:focus-within {
+      --border-color: var(--vendoora-input-focus-border-color);
+      --background: rgba(102, 126, 234, 0.05);
+      transform: translateY(-2px);
+      box-shadow: var(--vendoora-shadow-lg);
+    }
+  }
+
+  .input-label {
+    display: flex;
+    align-items: center;
+    gap: var(--vendoora-space-2);
+    font-weight: var(--vendoora-font-medium);
+    color: var(--vendoora-text-primary);
+  }
+
+  .input-icon {
+    font-size: var(--vendoora-text-xl);
+    color: var(--vendoora-primary);
+  }
+
+  .error-message {
+    margin-top: var(--vendoora-space-2);
+    padding-left: var(--vendoora-space-4);
+    
+    small {
+      font-size: var(--vendoora-text-sm);
+    }
+  }
+}
+
+// Form options
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--vendoora-space-8);
+  flex-wrap: wrap;
+  gap: var(--vendoora-space-4);
+}
+
+.remember-checkbox {
+  --border-radius: var(--vendoora-radius-md);
+  --border-width: var(--vendoora-input-border-width);
+  --border-color: var(--vendoora-primary);
+  --checkmark-color: var(--vendoora-white);
+  --background-checked: var(--vendoora-primary);
+  
+  .checkbox-label {
+    margin-left: var(--vendoora-space-2);
+    font-size: var(--vendoora-text-sm);
+    color: var(--vendoora-text-secondary);
+  }
+}
+
+.forgot-password-btn {
+  --color: var(--vendoora-primary);
+  font-size: var(--vendoora-text-sm);
+  font-weight: var(--vendoora-font-medium);
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  
+  &:hover {
+    --color: var(--vendoora-primary-dark);
+  }
+}
+
+// Buttons
+.login-btn {
+  --background: var(--vendoora-gradient-primary);
+  --border-radius: var(--vendoora-button-border-radius);
+  --padding-top: var(--vendoora-button-padding-y);
+  --padding-bottom: var(--vendoora-button-padding-y);
+  --font-weight: var(--vendoora-button-font-weight);
+  --box-shadow: var(--vendoora-shadow-xl);
+  margin-bottom: var(--vendoora-space-4);
+  transition: var(--vendoora-button-transition);
+  
+  &:hover {
+    --box-shadow: var(--vendoora-shadow-2xl);
+    transform: translateY(-2px);
+  }
+  
+  &:disabled {
+    --background: var(--vendoora-gray-400);
+    --box-shadow: none;
+    transform: none;
+  }
+}
+
+.demo-btn {
+  --border-color: var(--vendoora-primary);
+  --color: var(--vendoora-primary);
+  --border-radius: var(--vendoora-button-border-radius);
+  --padding-top: var(--vendoora-button-padding-y);
+  --padding-bottom: var(--vendoora-button-padding-y);
+  --font-weight: var(--vendoora-font-medium);
+  transition: var(--vendoora-button-transition);
+  
+  &:hover {
+    --background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+  }
+}
+
+// Divider
+.divider {
+  position: relative;
+  text-align: center;
+  margin: var(--vendoora-space-6) 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--vendoora-border);
+  }
+  
+  .divider-text {
+    background: var(--vendoora-background);
+    padding: 0 var(--vendoora-space-4);
+    color: var(--vendoora-text-muted);
+    font-size: var(--vendoora-text-sm);
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// Footer
+.footer {
+  text-align: center;
+  margin-top: var(--vendoora-space-8);
+  z-index: 2;
+  position: relative;
+}
+
+.footer-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--vendoora-text-sm);
+  margin: 0;
+}
+
+.signup-link {
+  --color: var(--vendoora-white);
+  font-weight: var(--vendoora-font-semibold);
+  text-decoration: underline;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  
+  &:hover {
+    --color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+// Responsive design
+@media (max-width: 480px) {
+  .login-container {
+    padding: var(--vendoora-space-4);
+  }
+  
+  .brand-title {
+    font-size: var(--vendoora-text-4xl);
+  }
+  
+  .card-content {
+    padding: var(--vendoora-space-6);
+  }
+  
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--vendoora-space-2);
+  }
+  
+  .forgot-password-btn {
+    align-self: flex-end;
+  }
+}
+
+// Dark mode support is now handled by global variables

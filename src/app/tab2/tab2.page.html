@@ -1,199 +1,267 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Add Product </ion-title>
+<ion-header [translucent]="true" class="vendoora-header">
+  <ion-toolbar class="vendoora-toolbar">
+    <ion-title class="vendoora-title">
+      <ion-icon name="add-circle-outline" class="title-icon"></ion-icon>
+      Add Product
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="vendoora-content">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Add Product</ion-title>
+  <ion-header collapse="condense" class="vendoora-header-collapse">
+    <ion-toolbar class="vendoora-toolbar">
+      <ion-title size="large" class="vendoora-title-large">
+        <ion-icon name="add-circle-outline" class="title-icon"></ion-icon>
+        Add Product
+      </ion-title>
     </ion-toolbar>
   </ion-header>
-  <br />
-  <div class="ion-padding">
-    <form [formGroup]="myForm" (ngSubmit)="submit()">
-      <br />
 
-      <ion-item>
-        <ion-select
-          (ionChange)="callSubCategoryApi($event.target.value)"
-          placeholder="Select Category"
-          formControlName="category"
-          interface="popover"
-          #tempCategory
-        >
-          <div slot="label">Category <ion-text color="danger">*</ion-text></div>
-          @for (category of categories; track $index) {
-          <ion-select-option [value]="category.id"
-            >{{category.categoryName}}</ion-select-option
+  <div class="vendoora-container">
+    <div class="vendoora-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <ion-icon name="cube-outline" class="card-icon"></ion-icon>
+          Product Information
+        </h2>
+        <p class="card-subtitle">Fill in the details to add your product</p>
+      </div>
+
+      <form [formGroup]="myForm" (ngSubmit)="submit()" class="vendoora-form">
+        
+        <!-- Brand Selection -->
+        <div class="form-section">
+          <div class="section-header">
+            <ion-icon name="business-outline" class="section-icon"></ion-icon>
+            <h3 class="section-title">Brand Details</h3>
+          </div>
+          
+          <ion-item class="vendoora-form-item">
+            <ion-select
+              formControlName="brand"
+              interface="popover"
+              placeholder="Select Brand"
+              class="vendoora-select"
+            >
+              <div slot="label" class="form-label">
+                Brand <span class="required">*</span>
+              </div>
+
+              @for (brand of brands; track $index) {
+              <ion-select-option [value]="brand.id" class="vendoora-option">
+                {{brand.brandName}}
+              </ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <ion-icon name="images-outline" class="section-icon"></ion-icon>
+            <h3 class="section-title">Product Images</h3>
+            <p class="section-subtitle">Upload up to 4 images of your product</p>
+          </div>
+          
+          <div class="image-upload-grid">
+            <div class="image-upload-item">
+              <ion-button 
+                expand="block" 
+                (click)="photoService.selectImg_1()"
+                class="upload-button"
+                fill="outline"
+              >
+                <ion-icon name="camera-outline" slot="start"></ion-icon>
+                1st Image
+              </ion-button>
+              <div class="image-preview" *ngIf="photoService.img1.dataUrl">
+                <ion-img [src]="photoService.img1.dataUrl" class="preview-image"></ion-img>
+                <div class="image-overlay">
+                  <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+                </div>
+              </div>
+            </div>
+            
+            <div class="image-upload-item">
+              <ion-button 
+                expand="block" 
+                (click)="photoService.selectImg_2()"
+                class="upload-button"
+                fill="outline"
+              >
+                <ion-icon name="camera-outline" slot="start"></ion-icon>
+                2nd Image
+              </ion-button>
+              <div class="image-preview" *ngIf="photoService.img2.dataUrl">
+                <ion-img [src]="photoService.img2.dataUrl" class="preview-image"></ion-img>
+                <div class="image-overlay">
+                  <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+                </div>
+              </div>
+            </div>
+            
+            <div class="image-upload-item">
+              <ion-button 
+                expand="block" 
+                (click)="photoService.selectImg_3()"
+                class="upload-button"
+                fill="outline"
+              >
+                <ion-icon name="camera-outline" slot="start"></ion-icon>
+                3rd Image
+              </ion-button>
+              <div class="image-preview" *ngIf="photoService.img3.dataUrl">
+                <ion-img [src]="photoService.img3.dataUrl" class="preview-image"></ion-img>
+                <div class="image-overlay">
+                  <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+                </div>
+              </div>
+            </div>
+            
+            <div class="image-upload-item">
+              <ion-button 
+                expand="block" 
+                (click)="photoService.selectImg_4()"
+                class="upload-button"
+                fill="outline"
+              >
+                <ion-icon name="camera-outline" slot="start"></ion-icon>
+                4th Image
+              </ion-button>
+              <div class="image-preview" *ngIf="photoService.img4.dataUrl">
+                <ion-img [src]="photoService.img4.dataUrl" class="preview-image"></ion-img>
+                <div class="image-overlay">
+                  <ion-icon name="checkmark-circle" class="check-icon"></ion-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <ion-icon name="document-text-outline" class="section-icon"></ion-icon>
+            <h3 class="section-title">Product Details</h3>
+          </div>
+          
+          <ion-item class="vendoora-form-item">
+            <ion-input
+              formControlName="productName"
+              labelPlacement="floating"
+              placeholder="Enter product name"
+              class="vendoora-input"
+            >
+              <div slot="label" class="form-label">
+                Product Name <span class="required">*</span>
+              </div>          
+            </ion-input>
+          </ion-item>
+
+          <ion-item class="vendoora-form-item">
+            <ion-textarea
+              formControlName="productDescription"
+              labelPlacement="floating"
+              placeholder="Describe your product in detail"
+              rows="4"
+              class="vendoora-textarea"
+            >
+              <div slot="label" class="form-label">
+                Product Description <span class="required">*</span>
+              </div>
+            </ion-textarea>
+          </ion-item>
+
+          <ion-item class="vendoora-form-item">
+            <ion-textarea
+              labelPlacement="floating"
+              formControlName="productKeyPoints"
+              placeholder="Key features and benefits"
+              [counter]="true"
+              maxlength="200"
+              rows="3"
+              class="vendoora-textarea"
+            >
+              <div slot="label" class="form-label">
+                Product Key Points <span class="required">*</span>
+              </div>
+            </ion-textarea>
+          </ion-item>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="form-section">
+          <div class="section-header">
+            <ion-icon name="card-outline" class="section-icon"></ion-icon>
+            <h3 class="section-title">Pricing Information</h3>
+          </div>
+          
+          <ion-item class="vendoora-form-item">
+            <ion-select
+              placeholder="Select Currency"
+              formControlName="currency"
+              interface="popover"
+              class="vendoora-select"
+            >
+              <div slot="label" class="form-label">
+                Currency <span class="required">*</span>
+              </div>
+              <ion-select-option value="INR" class="vendoora-option">₹ INR</ion-select-option>
+              <ion-select-option value="USD" class="vendoora-option">$ USD</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <div class="price-inputs">
+            <ion-item class="vendoora-form-item">
+              <ion-input
+                type="number"
+                formControlName="mrp"
+                labelPlacement="floating"
+                placeholder="0.00"
+                class="vendoora-input"
+              >
+                <div slot="label" class="form-label">
+                  Price (MRP) <span class="required">*</span>
+                </div>
+              </ion-input>
+            </ion-item>
+
+            <ion-item class="vendoora-form-item">
+              <ion-input
+                type="number"
+                formControlName="sp"
+                labelPlacement="floating"
+                placeholder="0.00"
+                class="vendoora-input"
+              >
+                <div slot="label" class="form-label">
+                  Selling Price <span class="required">*</span>
+                </div>
+              </ion-input>
+            </ion-item>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <ion-button
+            [disabled]="myForm.status === 'INVALID'"
+            type="submit"
+            expand="block"
+            class="submit-button"
+            [class.button-disabled]="myForm.status === 'INVALID'"
           >
-          }
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-select
-          formControlName="subCategory"
-          placeholder="Select Sub-Category"
-          interface="popover"
-        >
-          <div slot="label">
-            Sub-Category <ion-text color="danger">*</ion-text>
-          </div>
-
-          @for (subCat of subCategories; track $index) {
-          <ion-select-option [value]="subCat.id"
-            >{{subCat.subCategoryName}}</ion-select-option
-          >
-          }
-
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-select
-          formControlName="brand"
-          interface="popover"
-          placeholder="Select Brand"
-        >
-          <div slot="label">Brand <ion-text color="danger">*</ion-text></div>
-
-          @for (brand of brands; track $index) {
-          <ion-select-option [value]="brand.id"
-            >{{brand.brandName}}</ion-select-option
-          >
-          }
-        </ion-select>
-      </ion-item>
-      <br />
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="photoService.selectImg_1()">
-              1st Image
-            </ion-button>
-            <ion-img [src]="photoService.img1.dataUrl"></ion-img>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" (click)="photoService.selectImg_2()">
-              2nd Image
-            </ion-button>
-            <ion-img [src]="photoService.img2.dataUrl"></ion-img>
-          </ion-col>
-        </ion-row>
-        <!-- new row -->
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" (click)="photoService.selectImg_3()">
-              3rd Image
-            </ion-button>
-            <ion-img [src]="photoService.img3.dataUrl"></ion-img>
-          </ion-col>
-          <ion-col>
-            <ion-button expand="block" (click)="photoService.selectImg_4()">
-              4th Image
-            </ion-button>
-            <ion-img [src]="photoService.img4.dataUrl"></ion-img>
-          </ion-col>
-        </ion-row>
-        <!-- row ends -->
-      </ion-grid>
-
-     
-      <ion-item>
-        <ion-input
-          formControlName="productName"
-          labelPlacement="floating"
-          value=""
-        >
-          <div slot="label">
-            Product Name <ion-text color="danger"> *</ion-text>
-          </div>          
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-textarea
-          formControlName="productDescription"
-          labelPlacement="floating"
-          value=""
-        >
-          <div slot="label">
-            Product Description <ion-text color="danger">*</ion-text>
-          </div>
-        </ion-textarea>
-      </ion-item>
-
-      <ion-item>
-        <ion-textarea
-          labelPlacement="floating"
-          formControlName="productKeyPoints"
-          [counter]="true"
-          maxlength="200"
-        >
-          <div slot="label">
-            Product Key Points <ion-text color="danger"> *</ion-text>
-          </div>
-        </ion-textarea>
-      </ion-item>
-
-      <br />
-      <ion-item>
-        <ion-select
-          placeholder="Select Currency"
-          formControlName="currency"
-          interface="popover"
-          #tempCategory
-        >
-          <div slot="label">Currency <ion-text color="danger">*</ion-text></div>
-          <ion-select-option value="INR">in INR ₹</ion-select-option>
-          <ion-select-option value="USD">in USD $</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <br />
-
-      <ion-item>
-        <ion-input
-          type="number"
-          formControlName="mrp"
-          labelPlacement="floating"
-          value=""
-        >
-          <div slot="label">
-            Price ( MRP ) <ion-text color="danger"> *</ion-text>
-          </div>
-        </ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-input
-          type="number"
-          formControlName="sp"
-          labelPlacement="floating"
-          value=""
-        >
-          <div slot="label">
-            Selling Price <ion-text color="danger"> *</ion-text>
-          </div>
-        </ion-input>
-      </ion-item>
-
-      <br />
-      <ion-button
-        [disabled]="myForm.status === 'INVALID' "
-        type="submit"
-        fill="outline"
-        expand="block"
-        >Add Product</ion-button
-      >
-    </form>
+            <ion-icon name="add-circle" slot="start"></ion-icon>
+            Add Product
+          </ion-button>
+        </div>
+      </form>
+    </div>
   </div>
 </ion-content>
 
@@ -203,6 +271,7 @@
   [message]="alertMsg"
   [buttons]="alertButtons"
   (didDismiss)="setOpen(false, '')"
+  class="vendoora-alert"
 ></ion-alert>
 
-<ion-loading trigger="open-loading" message="Dismissing test"></ion-loading>
+<ion-loading trigger="open-loading" message="Processing..." class="vendoora-loading"></ion-loading>

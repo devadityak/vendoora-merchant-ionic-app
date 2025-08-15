@@ -7,7 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:3000/',
   jwtKey: 'laala-g-jwtToken',
   imgUrl: 'https://f003.backblazeb2.com/file/',
-  bucketName: 'laalag-bucket',
+  bucketName: 'vendoora-local-dev-bucket',
 };
 
 /*

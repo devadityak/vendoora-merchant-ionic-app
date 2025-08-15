@@ -17,7 +17,8 @@ import {
   IonItem,
   IonLabel,
   IonInput,
-  IonText,
+  // IonText,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../service/storage.service';
 
@@ -37,7 +38,8 @@ import { StorageService } from '../service/storage.service';
     IonItem,
     IonLabel,
     IonInput,
-    IonText,
+    // IonText,
+    IonIcon,
     ReactiveFormsModule,
   ],
 })
@@ -71,5 +73,12 @@ export class Tab3Page {
     console.log('hi');
     this.storageService.removeToken();
     this.router.navigateByUrl('/login');
+  }
+
+  clearData() {
+    console.log('Clearing app data...');
+    // Add implementation for clearing app data
+    this.storageService.removeToken();
+    // You can add additional logic here like showing a confirmation dialog
   }
 }

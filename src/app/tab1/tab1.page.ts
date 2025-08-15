@@ -24,6 +24,7 @@ import {
   IonCardContent,
   IonCardTitle,
   IonButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api.service';
@@ -61,6 +62,7 @@ import type { OverlayEventDetail } from '@ionic/core';
     IonCardContent,
     IonCardTitle,
     IonButton,
+    IonIcon,
     // IonicModule,
     CommonModule,
   ],
@@ -125,6 +127,60 @@ export class Tab1Page implements OnInit {
   setResult(event: CustomEvent<OverlayEventDetail>) {
     console.log(`Dismissed with role: ${event.detail.role}`);
     // this.setOpen(true, "Session expired. Please login again.");
+  }
+
+  // Status helper methods
+  getStatusClass(product: any): string {
+    if (product.reviewedAndPublished === false) {
+      return 'status-review';
+    } else if (product.blocked === true) {
+      return 'status-blocked';
+    } else {
+      return 'status-published';
+    }
+  }
+
+  getStatusIcon(product: any): string {
+    if (product.reviewedAndPublished === false) {
+      return 'time-outline';
+    } else if (product.blocked === true) {
+      return 'close-circle-outline';
+    } else {
+      return 'checkmark-circle-outline';
+    }
+  }
+
+  getStatusText(product: any): string {
+    if (product.reviewedAndPublished === false) {
+      return 'Under Review';
+    } else if (product.blocked === true) {
+      return 'Blocked';
+    } else {
+      return 'Published';
+    }
+  }
+
+  getDiscountPercentage(product: any): number {
+    if (product.productMrp > product.productSp) {
+      return Math.round(((product.productMrp - product.productSp) / product.productMrp) * 100);
+    }
+    return 0;
+  }
+
+  // Action methods
+  editProduct(product: any) {
+    console.log('Edit product:', product);
+    // Add implementation for editing product
+  }
+
+  deactivateProduct(product: any) {
+    console.log('Deactivate product:', product);
+    // Add implementation for deactivating product
+  }
+
+  markAsSold(product: any) {
+    console.log('Mark as sold:', product);
+    // Add implementation for marking product as sold
   }
 
 }

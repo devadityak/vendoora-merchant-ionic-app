@@ -11,13 +11,14 @@ import {
   IonItem,
   IonSelectOption,
   IonSelect,
-  IonText,
+  // IonText,
   IonButton,
-  IonCol,
-  IonRow,
-  IonGrid,
+  // IonCol,
+  // IonRow,
+  // IonGrid,
   IonImg,
   IonTextarea,
+  IonIcon,
   // IonLabel,
   IonRefresher,
   IonLoading,
@@ -47,12 +48,13 @@ import { Dialog } from '@capacitor/dialog';
     IonItem,
     IonSelectOption,
     IonSelect,
-    IonText,
+    // IonText,
     IonButton,
-    IonCol,
-    IonRow,
-    IonGrid,
+    // IonCol,
+    // IonRow,
+    // IonGrid,
     IonImg,
+    IonIcon,
     IonRefresher,
     IonRefresherContent,
     IonTextarea,
@@ -74,8 +76,8 @@ export class Tab2Page {
   ) {
 
     this.myForm = this.fb.group({
-      category: ['', [Validators.required]],
-      subCategory: ['', [Validators.required]],
+      category: ['1', [Validators.required]],
+      subCategory: ['1', [Validators.required]],
       brand: ['', [Validators.required]],
       productName: ['1', [Validators.required]],
       productDescription: ['1', [Validators.required]],
@@ -85,7 +87,13 @@ export class Tab2Page {
       currency: ['INR', [Validators.required]],
     });
 
-    this.callCategoryApi();
+    // this.callCategoryApi();
+    this.callSubCategoryApi(1);
+  }
+
+  ngOnInit() {
+    // this.callCategoryApi();
+    // this.callSubCategoryApi(1);
   }
 
   // productImg1: any;

@@ -1,0 +1,406 @@
+/* ==========================================================================
+   TAB2 PAGE STYLES - ADD PRODUCT
+   ========================================================================== */
+
+/* Header Styles */
+.vendoora-header {
+  background: var(--vendoora-gradient-primary);
+  
+  .vendoora-toolbar {
+    --background: transparent;
+    --color: var(--vendoora-white);
+    
+    .vendoora-title {
+      font-weight: var(--vendoora-font-semibold);
+      font-size: var(--vendoora-text-lg);
+      
+      .title-icon {
+        margin-right: var(--vendoora-space-2);
+        font-size: var(--vendoora-text-xl);
+      }
+    }
+  }
+}
+
+.vendoora-header-collapse {
+  background: var(--vendoora-gradient-primary);
+  
+  .vendoora-title-large {
+    font-weight: var(--vendoora-font-bold);
+    font-size: var(--vendoora-text-2xl);
+    
+    .title-icon {
+      margin-right: var(--vendoora-space-3);
+      font-size: var(--vendoora-text-2xl);
+    }
+  }
+}
+
+/* Content Styles */
+.vendoora-content {
+  --background: var(--vendoora-gradient-light);
+  background: var(--vendoora-gradient-light);
+}
+
+.vendoora-container {
+  padding: var(--vendoora-space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Card Styles */
+.vendoora-card {
+  background: var(--vendoora-card-background);
+  border-radius: var(--vendoora-card-border-radius);
+  box-shadow: var(--vendoora-card-shadow);
+  border: var(--vendoora-card-border);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  margin-bottom: var(--vendoora-space-6);
+  
+  .card-header {
+    background: var(--vendoora-gradient-primary);
+    padding: var(--vendoora-space-6);
+    text-align: center;
+    color: var(--vendoora-white);
+    
+    .card-title {
+      font-size: var(--vendoora-text-2xl);
+      font-weight: var(--vendoora-font-bold);
+      margin: 0 0 var(--vendoora-space-2) 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .card-icon {
+        margin-right: var(--vendoora-space-3);
+        font-size: var(--vendoora-text-2xl);
+      }
+    }
+    
+    .card-subtitle {
+      font-size: var(--vendoora-text-base);
+      opacity: 0.9;
+      margin: 0;
+      font-weight: var(--vendoora-font-normal);
+    }
+  }
+}
+
+/* Form Styles */
+.vendoora-form {
+  padding: var(--vendoora-space-6);
+}
+
+.form-section {
+  margin-bottom: var(--vendoora-space-8);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--vendoora-space-4);
+  padding-bottom: var(--vendoora-space-3);
+  border-bottom: 2px solid var(--vendoora-border-light);
+  
+  .section-icon {
+    font-size: var(--vendoora-text-xl);
+    color: var(--vendoora-primary);
+    margin-right: var(--vendoora-space-3);
+  }
+  
+  .section-title {
+    font-size: var(--vendoora-text-lg);
+    font-weight: var(--vendoora-font-semibold);
+    color: var(--vendoora-text-primary);
+    margin: 0;
+  }
+  
+  .section-subtitle {
+    font-size: var(--vendoora-text-sm);
+    color: var(--vendoora-text-secondary);
+    margin: var(--vendoora-space-1) 0 0 0;
+    font-weight: var(--vendoora-font-normal);
+  }
+}
+
+/* Form Item Styles */
+.vendoora-form-item {
+  --background: var(--vendoora-input-background);
+  --border-radius: var(--vendoora-input-border-radius);
+  --border-width: var(--vendoora-input-border-width);
+  --border-color: var(--vendoora-input-border-color);
+  --padding-start: var(--vendoora-input-padding);
+  --padding-end: var(--vendoora-input-padding);
+  --padding-top: var(--vendoora-space-3);
+  --padding-bottom: var(--vendoora-space-3);
+  margin-bottom: var(--vendoora-space-4);
+  border-radius: var(--vendoora-input-border-radius);
+  backdrop-filter: blur(5px);
+  transition: var(--vendoora-transition-base);
+  
+  &:hover {
+    --border-color: var(--vendoora-primary);
+    box-shadow: var(--vendoora-shadow-md);
+  }
+  
+  &.item-has-focus {
+    --border-color: var(--vendoora-input-focus-border-color);
+    box-shadow: var(--vendoora-shadow-lg);
+  }
+  
+  &.item-has-error {
+    --border-color: var(--vendoora-input-error-border-color);
+  }
+}
+
+/* Input Styles */
+.vendoora-input,
+.vendoora-textarea {
+  --color: var(--vendoora-text-primary);
+  --placeholder-color: var(--vendoora-text-muted);
+  font-size: var(--vendoora-text-base);
+  font-weight: var(--vendoora-font-normal);
+}
+
+/* Select Styles */
+.vendoora-select {
+  --color: var(--vendoora-text-primary);
+  --placeholder-color: var(--vendoora-text-muted);
+  font-size: var(--vendoora-text-base);
+  font-weight: var(--vendoora-font-normal);
+}
+
+.vendoora-option {
+  font-size: var(--vendoora-text-base);
+  font-weight: var(--vendoora-font-normal);
+}
+
+/* Form Label Styles */
+.form-label {
+  font-size: var(--vendoora-text-sm);
+  font-weight: var(--vendoora-font-medium);
+  color: var(--vendoora-text-primary);
+  
+  .required {
+    color: var(--ion-color-danger);
+    font-weight: var(--vendoora-font-bold);
+  }
+}
+
+/* Image Upload Styles */
+.image-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--vendoora-space-4);
+  margin-top: var(--vendoora-space-4);
+}
+
+.image-upload-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--vendoora-space-3);
+  
+  .upload-button {
+    --border-radius: var(--vendoora-button-border-radius);
+    --padding-top: var(--vendoora-button-padding-y);
+    --padding-bottom: var(--vendoora-button-padding-y);
+    --padding-start: var(--vendoora-button-padding-x);
+    --padding-end: var(--vendoora-button-padding-x);
+    --font-weight: var(--vendoora-button-font-weight);
+    --border-width: 2px;
+    --border-color: var(--vendoora-primary);
+    --color: var(--vendoora-primary);
+    font-size: var(--vendoora-text-sm);
+    transition: var(--vendoora-button-transition);
+    width: 100%;
+    
+    &:hover {
+      --background: var(--vendoora-primary);
+      --color: var(--vendoora-white);
+      transform: translateY(-2px);
+      box-shadow: var(--vendoora-shadow-lg);
+    }
+  }
+  
+  .image-preview {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    border-radius: var(--vendoora-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--vendoora-shadow-md);
+    
+    .preview-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(16, 220, 96, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .check-icon {
+        font-size: var(--vendoora-text-2xl);
+        color: var(--ion-color-success);
+        background: var(--vendoora-white);
+        border-radius: 50%;
+        padding: var(--vendoora-space-1);
+      }
+    }
+  }
+}
+
+/* Price Inputs Styles */
+.price-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--vendoora-space-4);
+  
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Actions Styles */
+.form-actions {
+  margin-top: var(--vendoora-space-8);
+  padding-top: var(--vendoora-space-6);
+  border-top: 2px solid var(--vendoora-border-light);
+  
+  .submit-button {
+    --background: var(--vendoora-gradient-primary);
+    --border-radius: var(--vendoora-button-border-radius);
+    --padding-top: var(--vendoora-button-padding-y);
+    --padding-bottom: var(--vendoora-button-padding-y);
+    --padding-start: var(--vendoora-button-padding-x);
+    --padding-end: var(--vendoora-button-padding-x);
+    --font-weight: var(--vendoora-button-font-weight);
+    --color: var(--vendoora-white);
+    font-size: var(--vendoora-text-lg);
+    transition: var(--vendoora-button-transition);
+    box-shadow: var(--vendoora-shadow-lg);
+    
+    &:hover:not(.button-disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--vendoora-shadow-xl);
+    }
+    
+    &.button-disabled {
+      --background: var(--vendoora-gray-300);
+      --color: var(--vendoora-gray-500);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: var(--vendoora-shadow-sm);
+    }
+  }
+}
+
+/* Alert and Loading Styles */
+.vendoora-alert {
+  --background: var(--vendoora-card-background);
+  --border-radius: var(--vendoora-radius-xl);
+  --box-shadow: var(--vendoora-shadow-xl);
+}
+
+.vendoora-loading {
+  --background: var(--vendoora-card-background);
+  --border-radius: var(--vendoora-radius-xl);
+  --box-shadow: var(--vendoora-shadow-xl);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vendoora-container {
+    padding: var(--vendoora-space-3);
+  }
+  
+  .vendoora-card {
+    .card-header {
+      padding: var(--vendoora-space-4);
+      
+      .card-title {
+        font-size: var(--vendoora-text-xl);
+        
+        .card-icon {
+          font-size: var(--vendoora-text-xl);
+        }
+      }
+    }
+  }
+  
+  .vendoora-form {
+    padding: var(--vendoora-space-4);
+  }
+  
+  .image-upload-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .image-upload-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .price-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Animation Classes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.vendoora-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.form-section {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+}
+
+/* Focus and Accessibility */
+.vendoora-form-item:focus-within {
+  outline: 2px solid var(--vendoora-primary);
+  outline-offset: 2px;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .vendoora-card {
+    background: var(--vendoora-card-background);
+    border: var(--vendoora-card-border);
+  }
+  
+  .vendoora-form-item {
+    --background: var(--vendoora-input-background);
+  }
+}

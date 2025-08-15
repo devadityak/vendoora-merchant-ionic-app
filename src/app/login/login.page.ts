@@ -12,7 +12,7 @@ import {
   IonText,
   // IonLabel,
   //
-  IonLoading,
+  // IonLoading,
   // IonSpinner,
   IonCardHeader,
   IonCardTitle,
@@ -20,6 +20,7 @@ import {
   IonCardSubtitle,
   IonCardContent,
   IonInput,
+  IonIcon,
   Platform,
 } from '@ionic/angular/standalone';
 import { StorageService } from '../service/storage.service';
@@ -56,7 +57,8 @@ import { LoadingService } from '../service/loading.service';
     IonCardSubtitle,
     IonCardContent,
     IonInput,
-    IonLoading,
+    // IonLoading,
+    IonIcon,
     // IonSpinner,
     //
     ReactiveFormsModule,
@@ -78,8 +80,8 @@ export class LoginPage {
     private alertController: AlertController
   ) {
     this.myForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      username: ['kumarelectronics55@gmail.com', [Validators.required, Validators.email]],
+      password: ['pass123', [Validators.required]],
       rememberMe: [true, []],
     });
 
@@ -267,5 +269,19 @@ export class LoginPage {
     // else {
     //   this.storageService.removeRememberMe();
     // } 
+  }
+
+  // Add missing methods
+  forgotPassword() {
+    this.presentToast('Please contact your administrator to reset your password');
+  }
+
+  demoLogin() {
+    // Set demo credentials
+    this.myForm.patchValue({
+      username: 'kumarelectronics55@gmail.com',
+      password: 'pass123'
+    });
+    this.login();
   }
 }

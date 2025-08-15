@@ -1,100 +1,199 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title> Setting </ion-title>
+<ion-header [translucent]="true" class="vendoora-header">
+  <ion-toolbar class="vendoora-toolbar">
+    <ion-title class="vendoora-title">
+      <ion-icon name="settings-outline" class="title-icon"></ion-icon>
+      Settings
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Setting</ion-title>
+<ion-content [fullscreen]="true" class="vendoora-content">
+  <ion-header collapse="condense" class="vendoora-header-collapse">
+    <ion-toolbar class="vendoora-toolbar">
+      <ion-title size="large" class="vendoora-title-large">
+        <ion-icon name="settings-outline" class="title-icon"></ion-icon>
+        Settings
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <br />
-  <br />
-
-  <ion-accordion-group (ionChange)="accordionGroupChange($event)">
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-label>Change Password</ion-label>
-      </ion-item>
-
-      <div class="ion-padding" slot="content">
-        <form [formGroup]="myForm">
-          <ion-item>
-            <ion-input
-              formControlName="oldPassword"
-              labelPlacement="floating"
-              value=""
-            >
-              <div slot="label">
-                Old Password
-                <ion-text color="danger"> *</ion-text>
-              </div>
-            </ion-input>
-          </ion-item>
-          <br />
-          <ion-item>
-            <ion-input
-              formControlName="newPassword"
-              labelPlacement="floating"
-              value=""
-            >
-              <div slot="label">
-                New Password
-                <ion-text color="danger" required="true"> *</ion-text>
-              </div>
-            </ion-input>
-          </ion-item>
-          <br />
-          <ion-item>
-            <ion-input
-              formControlName="retypeNewPassword"
-              labelPlacement="floating"
-              value=""
-            >
-              <div slot="label">
-                Retype New Password
-                <ion-text color="danger"> *</ion-text>
-              </div>
-            </ion-input>
-          </ion-item>
-
-          <br />
-
-          <ion-button fill="outline" expand="block">Change Password</ion-button>
-        </form>
+  <div class="vendoora-container">
+    <div class="vendoora-card">
+      <div class="card-header">
+        <h2 class="card-title">
+          <ion-icon name="person-circle-outline" class="card-icon"></ion-icon>
+          Account Settings
+        </h2>
+        <p class="card-subtitle">Manage your account preferences and security</p>
       </div>
-    </ion-accordion>
-    <ion-accordion value="second">
-      <ion-item slot="header" color="light">
-        <ion-label>Other</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <br />
-        <ion-button
-          color="danger"
-          fill="outline"
-          expand="block"
-          (click)="logout()"
-          >Logout</ion-button
-        >
+
+      <div class="settings-content">
+        <ion-accordion-group (ionChange)="accordionGroupChange($event)" class="vendoora-accordion-group">
+          
+          <!-- Change Password Accordion -->
+          <ion-accordion value="first" class="vendoora-accordion">
+            <ion-item slot="header" class="accordion-header">
+              <ion-icon name="lock-closed-outline" slot="start" class="accordion-icon"></ion-icon>
+              <ion-label class="accordion-label">Change Password</ion-label>
+              <ion-icon name="chevron-down-outline" slot="end" class="accordion-chevron"></ion-icon>
+            </ion-item>
+
+            <div class="accordion-content" slot="content">
+              <form [formGroup]="myForm" class="vendoora-form">
+                <div class="form-section">
+                  <div class="section-header">
+                    <ion-icon name="shield-checkmark-outline" class="section-icon"></ion-icon>
+                    <h3 class="section-title">Password Security</h3>
+                    <p class="section-subtitle">Update your password to keep your account secure</p>
+                  </div>
+                  
+                  <ion-item class="vendoora-form-item">
+                    <ion-input
+                      formControlName="oldPassword"
+                      labelPlacement="floating"
+                      placeholder="Enter current password"
+                      type="password"
+                      class="vendoora-input"
+                    >
+                      <div slot="label" class="form-label">
+                        Current Password <span class="required">*</span>
+                      </div>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item class="vendoora-form-item">
+                    <ion-input
+                      formControlName="newPassword"
+                      labelPlacement="floating"
+                      placeholder="Enter new password"
+                      type="password"
+                      class="vendoora-input"
+                    >
+                      <div slot="label" class="form-label">
+                        New Password <span class="required">*</span>
+                      </div>
+                    </ion-input>
+                  </ion-item>
+
+                  <ion-item class="vendoora-form-item">
+                    <ion-input
+                      formControlName="retypeNewPassword"
+                      labelPlacement="floating"
+                      placeholder="Confirm new password"
+                      type="password"
+                      class="vendoora-input"
+                    >
+                      <div slot="label" class="form-label">
+                        Confirm New Password <span class="required">*</span>
+                      </div>
+                    </ion-input>
+                  </ion-item>
+
+                  <div class="form-actions">
+                    <ion-button 
+                      fill="outline" 
+                      expand="block"
+                      class="update-button"
+                      (click)="submit()"
+                    >
+                      <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+                      Update Password
+                    </ion-button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </ion-accordion>
+
+          <!-- Account Actions Accordion -->
+          <ion-accordion value="second" class="vendoora-accordion">
+            <ion-item slot="header" class="accordion-header">
+              <ion-icon name="person-outline" slot="start" class="accordion-icon"></ion-icon>
+              <ion-label class="accordion-label">Account Actions</ion-label>
+              <ion-icon name="chevron-down-outline" slot="end" class="accordion-chevron"></ion-icon>
+            </ion-item>
+
+            <div class="accordion-content" slot="content">
+              <div class="actions-section">
+                <div class="section-header">
+                  <ion-icon name="log-out-outline" class="section-icon"></ion-icon>
+                  <h3 class="section-title">Session Management</h3>
+                  <p class="section-subtitle">Manage your account session and security</p>
+                </div>
+                
+                <div class="action-buttons">
+                  <ion-button
+                    color="danger"
+                    fill="outline"
+                    expand="block"
+                    class="logout-button"
+                    (click)="logout()"
+                  >
+                    <ion-icon name="log-out-outline" slot="start"></ion-icon>
+                    Sign Out
+                  </ion-button>
+                  
+                  <ion-button
+                    color="warning"
+                    fill="outline"
+                    expand="block"
+                    class="clear-data-button"
+                    (click)="clearData()"
+                  >
+                    <ion-icon name="trash-outline" slot="start"></ion-icon>
+                    Clear App Data
+                  </ion-button>
+                </div>
+              </div>
+            </div>
+          </ion-accordion>
+
+          <!-- App Information Accordion -->
+          <ion-accordion value="third" class="vendoora-accordion">
+            <ion-item slot="header" class="accordion-header">
+              <ion-icon name="information-circle-outline" slot="start" class="accordion-icon"></ion-icon>
+              <ion-label class="accordion-label">App Information</ion-label>
+              <ion-icon name="chevron-down-outline" slot="end" class="accordion-chevron"></ion-icon>
+            </ion-item>
+
+            <div class="accordion-content" slot="content">
+              <div class="info-section">
+                <div class="section-header">
+                  <ion-icon name="phone-portrait-outline" class="section-icon"></ion-icon>
+                  <h3 class="section-title">About Vendoora</h3>
+                  <p class="section-subtitle">App version and developer information</p>
+                </div>
+                
+                <div class="info-list">
+                  <div class="info-item">
+                    <ion-icon name="logo-ionic" class="info-icon"></ion-icon>
+                    <div class="info-content">
+                      <h4 class="info-title">App Version</h4>
+                      <p class="info-value">1.0.0</p>
+                    </div>
+                  </div>
+                  
+                  <div class="info-item">
+                    <ion-icon name="build-outline" class="info-icon"></ion-icon>
+                    <div class="info-content">
+                      <h4 class="info-title">Build Number</h4>
+                      <p class="info-value">2024.1.0</p>
+                    </div>
+                  </div>
+                  
+                  <div class="info-item">
+                    <ion-icon name="calendar-outline" class="info-icon"></ion-icon>
+                    <div class="info-content">
+                      <h4 class="info-title">Last Updated</h4>
+                      <p class="info-value">January 2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
       </div>
-    </ion-accordion>
-    <!-- <ion-accordion value="third">
-      <ion-item slot="header" color="light">
-        <ion-label>Third Accordion</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">Third Content</div>
-    </ion-accordion> -->
-  </ion-accordion-group>
-
-  <!-- <ion-list>
-    <ion-item> Change Password </ion-item>
-  </ion-list> -->
-
-  <!-- <ion-button fill="outline" expand="block">Add Product</ion-button> -->
-
-  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
+    </div>
+  </div>
 </ion-content>

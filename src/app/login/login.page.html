@@ -1,124 +1,139 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title> Login </ion-title>
+    <ion-title class="login-title">Vendoora</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-container">
+    <!-- Background gradient overlay -->
+    <div class="background-overlay"></div>
+    
+    <!-- Logo/Brand section -->
+    <div class="brand-section">
+      <div class="logo-container">
+        <!-- <ion-icon name="business-outline" class="logo-icon"></ion-icon> -->
+        <img src="assets/images/vendoora-icon-no-background.png" alt="Vendoora Logo" class="logo-icon">
+      </div>
+      <h1 class="brand-title">Vendoora</h1>
+      <p class="brand-subtitle">Vendor Management Platform</p>
+    </div>
 
-  <div>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Laala-G Partner Login</ion-card-title>
-        <ion-card-subtitle>Welcome Lala-G</ion-card-subtitle>
-      </ion-card-header>
+    <!-- Login Card -->
+    <div class="login-card-container">
+      <ion-card class="login-card">
+        <ion-card-header class="card-header">
+          <ion-card-title class="card-title">Welcome Back</ion-card-title>
+          <ion-card-subtitle class="card-subtitle">Sign in to your account</ion-card-subtitle>
+        </ion-card-header>
 
-      <ion-card-content>
-        <div class="ion-padding" slot="content">
-          <form [formGroup]="myForm" (ngSubmit)="login()">
-            <ion-input
-              formControlName="username"
-              labelPlacement="floating"
-              type="email"
-            >
-              <div slot="label">
-                Email
-                <ion-text color="danger"> *</ion-text>
-              </div>
-            </ion-input>
-            <br />
-            <ion-input
-              labelPlacement="floating"
-              type="password"
-              formControlName="password"
-            >
-              <div slot="label">
-                Password
-                <ion-text color="danger" required="true"> *</ion-text>
-              </div>
-            </ion-input>
-
-            <div style="text-align: right;" class="ion-padding " slot="content">
-              <ion-checkbox formControlName="rememberMe">Remember Me</ion-checkbox>
+        <ion-card-content class="card-content">
+          <form [formGroup]="myForm" (ngSubmit)="login()" class="login-form">
+            
+            <!-- Email Input -->
+            <div class="input-group">
+              <ion-input
+                formControlName="username"
+                labelPlacement="floating"
+                type="email"
+                class="custom-input"
+                placeholder="Enter your email"
+                [class.input-error]="myForm.get('username')?.invalid && myForm.get('username')?.touched"
+              >
+                <div slot="label" class="input-label">
+                  <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+                  Email Address
+                  <ion-text color="danger">*</ion-text>
+                </div>
+              </ion-input>
+              @if (myForm.get('username')?.invalid && myForm.get('username')?.touched) {
+                <div class="error-message">
+                  <ion-text color="danger">
+                    <small>Please enter a valid email address</small>
+                  </ion-text>
+                </div>
+              }
             </div>
 
+            <!-- Password Input -->
+            <div class="input-group">
+              <ion-input
+                labelPlacement="floating"
+                type="password"
+                formControlName="password"
+                class="custom-input"
+                placeholder="Enter your password"
+                [class.input-error]="myForm.get('password')?.invalid && myForm.get('password')?.touched"
+              >
+                <div slot="label" class="input-label">
+                  <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+                  Password
+                  <ion-text color="danger">*</ion-text>
+                </div>
+              </ion-input>
+              @if (myForm.get('password')?.invalid && myForm.get('password')?.touched) {
+                <div class="error-message">
+                  <ion-text color="danger">
+                    <small>Password is required</small>
+                  </ion-text>
+                </div>
+              }
+            </div>
 
-            <ion-button type="submit" fill="outline" expand="block"
-              >Login</ion-button
+            <!-- Remember Me & Forgot Password -->
+            <div class="form-options">
+              <ion-checkbox formControlName="rememberMe" class="remember-checkbox">
+                <div class="checkbox-label">Remember me</div>
+              </ion-checkbox>
+              <ion-button fill="clear" class="forgot-password-btn" (click)="forgotPassword()">
+                Forgot Password?
+              </ion-button>
+            </div>
+
+            <!-- Login Button -->
+            <ion-button 
+              type="submit" 
+              expand="block" 
+              class="login-btn"
+              [disabled]="myForm.invalid"
             >
+              <ion-icon name="log-in-outline" slot="start"></ion-icon>
+              Sign In
+            </ion-button>
 
-            <br />
+            <!-- Divider -->
+            <div class="divider">
+              <span class="divider-text">or</span>
+            </div>
 
-            <ion-button
-              type="button"
-              fill="outline"
-              color="danger"
-              expand="block"
-              >Forgot Password</ion-button
+            <!-- Demo Login Button -->
+            <ion-button 
+              type="button" 
+              fill="outline" 
+              expand="block" 
+              class="demo-btn"
+              (click)="demoLogin()"
             >
-
-            <!-- <ion-button
-              type="button"
-              fill="outline"
-              color="warning"
-              expand="block"
-              (click)="loading1()"
-              >Loading 1 <ion-spinner name="lines"></ion-spinner>
-            </ion-button> -->
-
-            <!-- <ion-button
-              type="button"
-              fill="outline"
-              color="warning"
-              expand="block"
-              (click)="loading2()"
-              >Loading 2</ion-button
-            > -->
-
-            <!-- <ion-button id="open-loading">Show Loading</ion-button> -->
-            <ion-loading
-              trigger="open-loading"
-              message="Dismissing test"
-            ></ion-loading>
-
-            <!-- <ion-button
-              type="button"
-              fill="outline"
-              color="danger"
-              expand="block"
-              (click)="testApi()"
-              >TEST API 4
-            </ion-button> -->
-            <br />
-            <!-- <ion-button
-              type="button"
-              fill="outline"
-              color="danger"
-              expand="block"
-              (click)="openBrowser()"
-            >
-              Browser test
-            </ion-button> -->
-
-            <!-- <h2>{{url}}</h2> -->
+              <ion-icon name="play-outline" slot="start"></ion-icon>
+              Become a Partner
+            </ion-button>
           </form>
-        </div>
-      </ion-card-content>
-    </ion-card>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p class="footer-text">Don't have an account? <ion-button fill="clear" class="signup-link">Contact Admin</ion-button></p>
+    </div>
   </div>
 </ion-content>
 
+<!-- Alert for error messages -->
 <ion-alert
   [isOpen]="isAlertOpen"
-  header="Alert"
+  header="Login Error"
   [message]="alertMsg"
   [buttons]="alertButtons"
   (didDismiss)="setOpen(false, '')"
 ></ion-alert>
-
-<!-- <ion-button href="tabs/tab1">Default</ion-button> -->

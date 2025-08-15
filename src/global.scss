@@ -24,3 +24,311 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+/* ==========================================================================
+   VENDOORA DESIGN SYSTEM
+   ========================================================================== */
+
+:root {
+  /* ==========================================================================
+     COLOR PALETTE
+     ========================================================================== */
+  
+  /* Primary Colors */
+  --ion-color-primary: #667eea;
+  --ion-color-primary-rgb: 102, 126, 234;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #5b6fce;
+  --ion-color-primary-tint: #758bec;
+
+  /* Secondary Colors */
+  --ion-color-secondary: #764ba2;
+  --ion-color-secondary-rgb: 118, 75, 162;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #68428f;
+  --ion-color-secondary-tint: #845dab;
+
+  /* Success Colors */
+  --ion-color-success: #10dc60;
+  --ion-color-success-rgb: 16, 220, 96;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #0ec254;
+  --ion-color-success-tint: #28e070;
+
+  /* Warning Colors */
+  --ion-color-warning: #ffce00;
+  --ion-color-warning-rgb: 255, 206, 0;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: #e0b500;
+  --ion-color-warning-tint: #ffd31a;
+
+  /* Danger Colors */
+  --ion-color-danger: #f04141;
+  --ion-color-danger-rgb: 245, 61, 61;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #d33939;
+  --ion-color-danger-tint: #f25454;
+
+  /* Custom Color Variables */
+  --vendoora-primary: #667eea;
+  --vendoora-primary-light: #758bec;
+  --vendoora-primary-dark: #5b6fce;
+  --vendoora-secondary: #764ba2;
+  --vendoora-secondary-light: #845dab;
+  --vendoora-secondary-dark: #68428f;
+  
+  /* Gradient Colors */
+  --vendoora-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --vendoora-gradient-secondary: linear-gradient(135deg, #667eea 0%, #5a6fd8 100%);
+  --vendoora-gradient-light: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  
+  /* Neutral Colors */
+  --vendoora-white: #ffffff;
+  --vendoora-black: #000000;
+  --vendoora-gray-50: #f9fafb;
+  --vendoora-gray-100: #f3f4f6;
+  --vendoora-gray-200: #e5e7eb;
+  --vendoora-gray-300: #d1d5db;
+  --vendoora-gray-400: #9ca3af;
+  --vendoora-gray-500: #6b7280;
+  --vendoora-gray-600: #4b5563;
+  --vendoora-gray-700: #374151;
+  --vendoora-gray-800: #1f2937;
+  --vendoora-gray-900: #111827;
+
+  /* Semantic Colors */
+  --vendoora-text-primary: #1f2937;
+  --vendoora-text-secondary: #6b7280;
+  --vendoora-text-muted: #9ca3af;
+  --vendoora-border: #e5e7eb;
+  --vendoora-border-light: #f3f4f6;
+  --vendoora-background: #ffffff;
+  --vendoora-background-secondary: #f9fafb;
+  --vendoora-background-tertiary: #f3f4f6;
+
+  /* ==========================================================================
+     TYPOGRAPHY
+     ========================================================================== */
+  
+  --vendoora-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --vendoora-font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  
+  /* Font Sizes */
+  --vendoora-text-xs: 0.75rem;    /* 12px */
+  --vendoora-text-sm: 0.875rem;   /* 14px */
+  --vendoora-text-base: 1rem;     /* 16px */
+  --vendoora-text-lg: 1.125rem;   /* 18px */
+  --vendoora-text-xl: 1.25rem;    /* 20px */
+  --vendoora-text-2xl: 1.5rem;    /* 24px */
+  --vendoora-text-3xl: 1.875rem;  /* 30px */
+  --vendoora-text-4xl: 2.25rem;   /* 36px */
+  --vendoora-text-5xl: 3rem;      /* 48px */
+  
+  /* Font Weights */
+  --vendoora-font-light: 300;
+  --vendoora-font-normal: 400;
+  --vendoora-font-medium: 500;
+  --vendoora-font-semibold: 600;
+  --vendoora-font-bold: 700;
+  --vendoora-font-extrabold: 800;
+  
+  /* Line Heights */
+  --vendoora-leading-none: 1;
+  --vendoora-leading-tight: 1.25;
+  --vendoora-leading-snug: 1.375;
+  --vendoora-leading-normal: 1.5;
+  --vendoora-leading-relaxed: 1.625;
+  --vendoora-leading-loose: 2;
+
+  /* ==========================================================================
+     SPACING
+     ========================================================================== */
+  
+  --vendoora-space-0: 0;
+  --vendoora-space-1: 0.25rem;   /* 4px */
+  --vendoora-space-2: 0.5rem;    /* 8px */
+  --vendoora-space-3: 0.75rem;   /* 12px */
+  --vendoora-space-4: 1rem;      /* 16px */
+  --vendoora-space-5: 1.25rem;   /* 20px */
+  --vendoora-space-6: 1.5rem;    /* 24px */
+  --vendoora-space-8: 2rem;      /* 32px */
+  --vendoora-space-10: 2.5rem;   /* 40px */
+  --vendoora-space-12: 3rem;     /* 48px */
+  --vendoora-space-16: 4rem;     /* 64px */
+  --vendoora-space-20: 5rem;     /* 80px */
+  --vendoora-space-24: 6rem;     /* 96px */
+
+  /* ==========================================================================
+     BORDER RADIUS
+     ========================================================================== */
+  
+  --vendoora-radius-none: 0;
+  --vendoora-radius-sm: 0.125rem;  /* 2px */
+  --vendoora-radius-base: 0.25rem; /* 4px */
+  --vendoora-radius-md: 0.375rem;  /* 6px */
+  --vendoora-radius-lg: 0.5rem;    /* 8px */
+  --vendoora-radius-xl: 0.75rem;   /* 12px */
+  --vendoora-radius-2xl: 1rem;     /* 16px */
+  --vendoora-radius-3xl: 1.5rem;   /* 24px */
+  --vendoora-radius-full: 9999px;
+
+  /* ==========================================================================
+     SHADOWS
+     ========================================================================== */
+  
+  --vendoora-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --vendoora-shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --vendoora-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --vendoora-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --vendoora-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --vendoora-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --vendoora-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* ==========================================================================
+     TRANSITIONS
+     ========================================================================== */
+  
+  --vendoora-transition-fast: 150ms ease-in-out;
+  --vendoora-transition-base: 300ms ease-in-out;
+  --vendoora-transition-slow: 500ms ease-in-out;
+
+  /* ==========================================================================
+     Z-INDEX
+     ========================================================================== */
+  
+  --vendoora-z-dropdown: 1000;
+  --vendoora-z-sticky: 1020;
+  --vendoora-z-fixed: 1030;
+  --vendoora-z-modal-backdrop: 1040;
+  --vendoora-z-modal: 1050;
+  --vendoora-z-popover: 1060;
+  --vendoora-z-tooltip: 1070;
+  --vendoora-z-toast: 1080;
+
+  /* ==========================================================================
+     COMPONENT SPECIFIC VARIABLES
+     ========================================================================== */
+  
+  /* Card Variables */
+  --vendoora-card-background: rgba(255, 255, 255, 0.95);
+  --vendoora-card-border-radius: var(--vendoora-radius-2xl);
+  --vendoora-card-shadow: var(--vendoora-shadow-xl);
+  --vendoora-card-border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* Input Variables */
+  --vendoora-input-background: rgba(255, 255, 255, 0.8);
+  --vendoora-input-border-radius: var(--vendoora-radius-xl);
+  --vendoora-input-border-width: 2px;
+  --vendoora-input-border-color: rgba(102, 126, 234, 0.2);
+  --vendoora-input-padding: var(--vendoora-space-4);
+  --vendoora-input-focus-border-color: var(--vendoora-primary);
+  --vendoora-input-error-border-color: var(--ion-color-danger);
+  
+  /* Button Variables */
+  --vendoora-button-border-radius: var(--vendoora-radius-xl);
+  --vendoora-button-padding-y: var(--vendoora-space-4);
+  --vendoora-button-padding-x: var(--vendoora-space-6);
+  --vendoora-button-font-weight: var(--vendoora-font-semibold);
+  --vendoora-button-transition: var(--vendoora-transition-base);
+}
+
+/* ==========================================================================
+   DARK MODE VARIABLES
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode color overrides */
+    --vendoora-text-primary: #f9fafb;
+    --vendoora-text-secondary: #d1d5db;
+    --vendoora-text-muted: #9ca3af;
+    --vendoora-border: #374151;
+    --vendoora-border-light: #4b5563;
+    --vendoora-background: #111827;
+    --vendoora-background-secondary: #1f2937;
+    --vendoora-background-tertiary: #374151;
+    
+    /* Component overrides for dark mode */
+    --vendoora-card-background: rgba(30, 30, 30, 0.95);
+    --vendoora-card-border: 1px solid rgba(255, 255, 255, 0.1);
+    --vendoora-input-background: rgba(50, 50, 50, 0.8);
+  }
+}
+
+/* ==========================================================================
+   GLOBAL UTILITY CLASSES
+   ========================================================================== */
+
+/* Text utilities */
+.text-primary { color: var(--vendoora-primary) !important; }
+.text-secondary { color: var(--vendoora-secondary) !important; }
+.text-success { color: var(--ion-color-success) !important; }
+.text-warning { color: var(--ion-color-warning) !important; }
+.text-danger { color: var(--ion-color-danger) !important; }
+.text-muted { color: var(--vendoora-text-muted) !important; }
+
+/* Background utilities */
+.bg-primary { background: var(--vendoora-gradient-primary) !important; }
+.bg-secondary { background: var(--vendoora-gradient-secondary) !important; }
+.bg-light { background: var(--vendoora-background-secondary) !important; }
+.bg-white { background: var(--vendoora-white) !important; }
+
+/* Border utilities */
+.border-primary { border-color: var(--vendoora-primary) !important; }
+.border-secondary { border-color: var(--vendoora-secondary) !important; }
+.border-light { border-color: var(--vendoora-border-light) !important; }
+
+/* Shadow utilities */
+.shadow-sm { box-shadow: var(--vendoora-shadow-sm) !important; }
+.shadow { box-shadow: var(--vendoora-shadow-base) !important; }
+.shadow-md { box-shadow: var(--vendoora-shadow-md) !important; }
+.shadow-lg { box-shadow: var(--vendoora-shadow-lg) !important; }
+.shadow-xl { box-shadow: var(--vendoora-shadow-xl) !important; }
+
+/* Rounded utilities */
+.rounded-sm { border-radius: var(--vendoora-radius-sm) !important; }
+.rounded { border-radius: var(--vendoora-radius-base) !important; }
+.rounded-md { border-radius: var(--vendoora-radius-md) !important; }
+.rounded-lg { border-radius: var(--vendoora-radius-lg) !important; }
+.rounded-xl { border-radius: var(--vendoora-radius-xl) !important; }
+.rounded-2xl { border-radius: var(--vendoora-radius-2xl) !important; }
+.rounded-full { border-radius: var(--vendoora-radius-full) !important; }
+
+/* ==========================================================================
+   GLOBAL RESETS AND BASE STYLES
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--vendoora-font-family);
+  font-size: var(--vendoora-text-base);
+  line-height: var(--vendoora-leading-normal);
+  color: var(--vendoora-text-primary);
+  background-color: var(--vendoora-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+*:focus {
+  outline: 2px solid var(--vendoora-primary);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
